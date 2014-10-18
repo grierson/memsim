@@ -6,9 +6,7 @@
 % Images
 \usepackage{graphicx}
 \graphicspath{{images/}}
-% Biblatex
-
-% Fancy Header
+ % Fancy Header
 \usepackage{fancyhdr}
 \fancypagestyle{plain}{
     \fancyhead[L]{Chapter \thechapter}
@@ -44,15 +42,14 @@
 
 \maketitle
 
-\chapter*{Abstract}
-Abstract goes here.
+%\input{abstract}
 
 \tableofcontents
 
-\input{chapters/introduction}
-\input{chapters/methodology}
-\input{chapters/chapter3}
+\input{introduction}
+\input{methodology}
 
-
+\bibliographystyle{plainnat}
+\bibliography{bibliography}
 
 \end{document}
