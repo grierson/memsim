@@ -1,7 +1,7 @@
 language: python
-python:
-        - "3.4"
-install:
-        pip install -r requirements.txt
+python: "3.4"
+install: pip install -r requirements.txt
 script:
-        py.test --doctest-modules && py.test --cov src/
+    - py.test --doctest-modules
+    - py.test --cov memsim/
+    - behave
