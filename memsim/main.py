@@ -11,13 +11,13 @@ class MemSim(tkinter.Tk):
         container = tkinter.Frame(self)
         container.pack(side="top", fill="both", expand=True)
         container.grid_rowconfigure(0, weight=1)
-        container.grid_rowconfigure(0, weight=1)
+        container.grid_columnconfigure(0, weight=1)
 
         self.frames = {}
-        frame = StartPage(container, self)
-        self.frames[StartPage] = frame
+        frame = Process(container, self)
+        self.frames[Process] = frame
         frame.grid(row=0, column=0, sticky="ne")
-        self.show_frame(StartPage)
+        self.show_frame(Process)
 
     def show_frame(self, cont):
         """show_frame"""
@@ -25,8 +25,8 @@ class MemSim(tkinter.Tk):
         frame.tkraise()
 
 
-class StartPage(tkinter.Frame):
-    """StartPage"""
+class Process(tkinter.Frame):
+    """Process"""
     def __init__(self, parent, controller):
         """__init__
 
@@ -34,8 +34,13 @@ class StartPage(tkinter.Frame):
         :param controller:
         """
         tkinter.Frame.__init__(self, parent)
-        label = tkinter.Label(self, text="Start Page", font=LARGE_FONT)
-        label.pack(pady=10, padx=10)
+        procces_label = tkinter.Label(self, text="Process Name:")
+        procces_label.pack(pady=10, padx=10)
+
+        create_process_button = tkinter.Button(self, text="Create Process",
+                                               command=lambda:
+                                               controller.show_frame(PageOne))
+        create_process_button.pack()
 
 
 def main():
