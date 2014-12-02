@@ -37,9 +37,7 @@ class Process(tkinter.Frame):
         procces_label = tkinter.Label(self, text="Process Name:")
         procces_label.pack(pady=10, padx=10)
 
-        create_process_button = tkinter.Button(self, text="Create Process",
-                                               command=lambda:
-                                               controller.show_frame(PageOne))
+        create_process_button = tkinter.Button(self, text="Create Process")
         create_process_button.pack()
 
 

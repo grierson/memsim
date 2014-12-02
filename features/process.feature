@@ -11,7 +11,5 @@ Feature: Create Process
     Examples:
         | process_name | process_size |
         | Firefox      | 100          |
-        | Word         | 700          |
-        | Vim          | 35           |
 
 
