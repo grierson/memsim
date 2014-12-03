@@ -21,3 +21,4 @@ def report_pylint():
 def report_cov():
     """cov"""
     sh('py.test --cov-report xml --cov=memsim/')
+    sh('mv coverage.xml reports/.')
