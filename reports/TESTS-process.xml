@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuite errors="0" failures="1" name="process.Create Process" skipped="0" tests="1" time="0.000103"><testcase classname="process.Create Process" name="Successfully creates process -- @1.1 " status="failed" time="0.000103"><failure message="" type="AssertionError">
+<![CDATA[
+Failing step: Given I enter Firefox ... failed in 0.000s
+Location: features/process.feature:7
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/behave/model.py", line 1404, in run
+    match.run(runner.context)
+  File "/usr/local/lib/python2.7/dist-packages/behave/model.py", line 1846, in run
+    self.func(context, *args, **kwargs)
+  File "/home/kyle/data/git/memsim/features/steps/steps_process.py", line 3, in step_impl
+    assert False
+AssertionError
+]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario Outline: Successfully creates process -- @1.1 
+    Given I enter Firefox ... failed in 0.000s
+    And I enter 100 ... skipped in 0.000s
+    When I press create process ... skipped in 0.000s
+    Then a process with Firefox and 100 should be created ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

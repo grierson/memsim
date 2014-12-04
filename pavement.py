@@ -4,10 +4,8 @@ import paver.doctools
 from paver.tasks import task
 from pip.req import parse_requirements
 from paver.setuputils import (
-    setup,
     install_distutils_tasks
 )
-from distutils.core import setup
 
 # -- REQUIRED-FOR: setup, sdist, ...
 # NOTE: Adds a lot more python-project related tasks.
@@ -17,7 +15,7 @@ install_distutils_tasks()
 # ----------------------------------------------------------------------------
 # PROJECT CONFIGURATION (for sdist/setup mostly):
 # ----------------------------------------------------------------------------
-NAME    = "MemSim"
+NAME = "MemSim"
 VERSION = open("VERSION.txt").read().strip()
 DESCRIPTION = "Memory Mangement Simulator"
 REQUIRES = parse_requirements("requirements.txt")
@@ -42,35 +40,31 @@ Topic :: Education
 # TASK CONFIGURATION:
 # ----------------------------------------------------------------------------
 options(
-    setup= dict(
-        name = NAME,
-        version = VERSION,
+    setup=dict(
+        name=NAME,
+        version=VERSION,
         url="http://pypi.python.org/pypi/%s/" % NAME,
         author="Kyle Grierson",
         author_email="grierson@openmailbox.net",
         license="BSD",
-        description= DESCRIPTION,
-        keywords   = "utility",
-        platforms  = [ 'any' ],
-        classifiers= CLASSIFIERS.splitlines(),
-        install_requires= INSTALL_REQUIRES,
-        include_package_data= True,
+        description=DESCRIPTION,
+        keywords="utility",
+        platforms=['any'],
+        classifiers=CLASSIFIERS.splitlines(),
+        install_requires=INSTALL_REQUIRES,
+        include_package_data=True,
     ),
     minilib=Bunch(
-        extra_files=[ 'doctools', 'virtual' ]
+        extra_files=['doctools', 'virtual']
     ),
-    pip = Bunch(
-        requirements_files=[
-            "requirements.txt",
-        ],
+    pip=Bunch(
+        requirements_files=["requirements.txt"],
     ),
     test=Bunch(
-        default_args=[
-            "features/",
-        ],
-        behave_formatter = "progress",
+        default_args=["features/"],
+        behave_formatter="progress",
     ),
-    pylint    = Bunch(default_args=NAME),
+    pylint=Bunch(default_args=NAME),
 )
 
 
@@ -95,6 +89,7 @@ def report_cov():
     sh('py.test --cov-report xml --cov=memsim/')
     sh('mv coverage.xml reports/.')
 
-@needs('report_cov','report_pylint')
+@needs('report_cov', 'report_pylint')
 def report():
+    """report"""
     pass
