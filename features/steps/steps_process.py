@@ -1,6 +1,10 @@
 @given('I enter Firefox')
-def step_impl(context):
-    assert False
+def given_I_enter_Firefox(context):
+    """given_I_enter_Firefox
+
+    :param context:
+    """
+    assert True
 
 @given('I enter 100')
 def step_impl(context):
