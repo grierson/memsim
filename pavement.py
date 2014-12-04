@@ -67,21 +67,33 @@ options(
     pylint=Bunch(default_args=NAME),
 )
 
-
+# Commands
 @task
 def unit():
     """unit_test"""
     sh('py.test test/')
 
 @task
-def bdd():
+def sbe():
     """bdd"""
     sh('behave')
+    
+@task
+def pylint():
+    """bdd"""
+    sh('pylint memsim/')
 
+@task
+def cov():
+    """bdd"""
+    sh('py.test --cov=memsim/')
+
+# Generate Reports
 @task
 def report_pylint():
     """lint"""
-    sh('pylint --msg-template="{path}:{line}:[{msg_id}({symbol}), {obj}] {msg}" memsim/ > reports/pylint.txt')
+    #sh('pylint --msg-template="{path}:{line}:[{msg_id}({symbol}), {obj}] {msg}" memsim/ > reports/pylint.txt')
+    sh('pylint memsim/ > reports/pylint.txt')
 
 @task
 def report_cov():
@@ -89,7 +101,12 @@ def report_cov():
     sh('py.test --cov-report xml --cov=memsim/')
     sh('mv coverage.xml reports/.')
 
-@needs('report_cov', 'report_pylint')
+@task
+def report_sbe():
+    """cov"""
+    sh('behave --junit --junit-directory=reports/')
+
+@needs('report_acceptance', 'report_cov', 'report_pylint')
 def report():
     """report"""
     pass

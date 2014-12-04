@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<testsuite errors="0" failures="1" name="process.Create Process" skipped="0" tests="1" time="0.000103"><testcase classname="process.Create Process" name="Successfully creates process -- @1.1 " status="failed" time="0.000103"><failure message="" type="AssertionError">
+<testsuite errors="0" failures="1" name="process.Create Process" skipped="0" tests="1" time="0.000134"><testcase classname="process.Create Process" name="Successfully creates process -- @1.1 " status="failed" time="0.000134"><failure message="" type="AssertionError">
 <![CDATA[
 Failing step: Given I enter Firefox ... failed in 0.000s
 Location: features/process.feature:7
