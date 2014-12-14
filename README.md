@@ -1,9 +1,9 @@
 # MemSim
 
 Tools
-* Unit Tests (TDD)
-* Acceptance test (BDD)
-* Continuous Integration (Jenkins)
+* Unit Tests (PyTest)
+* Acceptance test (Behave)
 * Static Code Analysis (Pylint)
+* Continuous Integration (Jenkins)
 
 ```paver sdist```
