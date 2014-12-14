@@ -1,20 +1,34 @@
-@given('I enter Firefox')
-def given_I_enter_Firefox(context):
-    """given_I_enter_Firefox
+""" Step file for Process """
+from behave import (
+    given,
+    when,
+    then,
+)
+
+@given(u'I enter "<process_name>" with "<process_size>"')
+def given_process_data(context, process_name, process_size):
+    """given_process_data
+
+    :param context:
+    :param process_name:
+    :param process_size:
+    """
+    assert True
+
+@when(u'I press create process')
+def when_button_pressed(context):
+    """when_button_pressed
 
     :param context:
     """
     assert True
 
-@given('I enter 100')
-def step_impl(context):
-    assert False
+@then(u'a process with "<process_name>" with "<process_size>" is created')
+def then_process_created(context, process_name, process_size):
+    """then_process_created
 
-@when('I press create process')
-def step_impl(context):
-    assert False
-
-@then('a process with Firefox and 100 should be created')
-def step_impl(context):
-    assert False
-
+    :param context:
+    :param process_name:
+    :param process_size:
+    """
+    assert True
