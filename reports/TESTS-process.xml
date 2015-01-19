@@ -1,25 +1,71 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<testsuite errors="0" failures="1" name="process.Create Process" skipped="0" tests="1" time="0.000134"><testcase classname="process.Create Process" name="Successfully creates process -- @1.1 " status="failed" time="0.000134"><failure message="" type="AssertionError">
+<testsuite errors="3" failures="0" name="process.Create Process" skipped="0" tests="3" time="0.000504"><testcase classname="process.Create Process" name="Successfully creates process -- @1.1 " status="failed" time="0.000243"><error message="name 'new_process_name' is not defined" type="NameError">
 <![CDATA[
-Failing step: Given I enter Firefox ... failed in 0.000s
-Location: features/process.feature:7
+Failing step: When I press create process ... failed in 0.000s
+Location: features/process.feature:4
 Traceback (most recent call last):
-  File "/usr/local/lib/python2.7/dist-packages/behave/model.py", line 1404, in run
+  File "/usr/local/lib/python3.4/dist-packages/behave/model.py", line 1440, in run
     match.run(runner.context)
-  File "/usr/local/lib/python2.7/dist-packages/behave/model.py", line 1846, in run
+  File "/usr/local/lib/python3.4/dist-packages/behave/model.py", line 1882, in run
     self.func(context, *args, **kwargs)
-  File "/home/kyle/data/git/memsim/features/steps/steps_process.py", line 3, in step_impl
-    assert False
-AssertionError
+  File "features/steps/steps_process.py", line 28, in when_i_create_a_process
+    new_process = Process(new_process_name, new_process_size)
+NameError: name 'new_process_name' is not defined
 ]]>
-</failure><system-out>
+</error><system-out>
 <![CDATA[
 @scenario.begin
   Scenario Outline: Successfully creates process -- @1.1 
-    Given I enter Firefox ... failed in 0.000s
-    And I enter 100 ... skipped in 0.000s
+    Given I enter "Firefox" with "100" ... passed in 0.000s
+    When I press create process ... failed in 0.000s
+    Then a process with "Firefox" with "100" is created ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="process.Create Process" name="Successfully creates process -- @1.2 " status="failed" time="0.000165"><error message="name 'new_process_name' is not defined" type="NameError">
+<![CDATA[
+Failing step: When I press create process ... failed in 0.000s
+Location: features/process.feature:4
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/behave/model.py", line 1440, in run
+    match.run(runner.context)
+  File "/usr/local/lib/python3.4/dist-packages/behave/model.py", line 1882, in run
+    self.func(context, *args, **kwargs)
+  File "features/steps/steps_process.py", line 28, in when_i_create_a_process
+    new_process = Process(new_process_name, new_process_size)
+NameError: name 'new_process_name' is not defined
+]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario Outline: Successfully creates process -- @1.2 
+    Given I enter "Vim" with "800" ... passed in 0.000s
+    When I press create process ... failed in 0.000s
+    Then a process with "Vim" with "800" is created ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="process.Create Process" name="Successfully creates process -- @1.3 " status="failed" time="9.6e-05"><error message="exceptions must derive from BaseException" type="TypeError">
+<![CDATA[
+Failing step: Given I enter "34234" with "60a" ... failed in 0.000s
+Location: features/process.feature:3
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/behave/model.py", line 1440, in run
+    match.run(runner.context)
+  File "/usr/local/lib/python3.4/dist-packages/behave/model.py", line 1882, in run
+    self.func(context, *args, **kwargs)
+  File "features/steps/steps_process.py", line 20, in given_i_enter_process_details
+    raise "Process unacceptable"
+TypeError: exceptions must derive from BaseException
+]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario Outline: Successfully creates process -- @1.3 
+    Given I enter "34234" with "60a" ... failed in 0.000s
     When I press create process ... skipped in 0.000s
-    Then a process with Firefox and 100 should be created ... skipped in 0.000s
+    Then a process with "34234" with "60a" is created ... skipped in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
