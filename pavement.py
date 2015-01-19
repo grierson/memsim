@@ -69,23 +69,28 @@ options(
 
 # Commands
 @task
+def run():
+    """run"""
+    sh('python3 memsim/main.py')
+
+@task
 def unit():
     """unit_test"""
     sh('py.test test/')
 
 @task
-def sbe():
+def bdd():
     """bdd"""
     sh('behave')
     
 @task
 def pylint():
-    """bdd"""
+    """pylint"""
     sh('pylint memsim/')
 
 @task
 def cov():
-    """bdd"""
+    """cov"""
     sh('py.test --cov=memsim/')
 
 # Generate Reports
@@ -102,8 +107,8 @@ def report_cov():
     sh('mv coverage.xml reports/.')
 
 @task
-def report_sbe():
-    """cov"""
+def report_bdd():
+    """report_sbe"""
     sh('behave --junit --junit-directory=reports/')
 
 @needs('report_acceptance', 'report_cov', 'report_pylint')

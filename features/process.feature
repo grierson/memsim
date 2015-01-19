@@ -7,5 +7,4 @@ Feature: Create Process
         | process_name | process_size |
         | Firefox      | 100          |
         | Vim          | 800          |
-        | MPD          | 400          |
-        | VLC          | 650          |
+        | 34234        | 60a          |
