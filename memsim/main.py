@@ -1,24 +1,27 @@
 """ Main File """
 import tkinter as tk
-from process import Process
+from process_panel import ProcessPanel
 
-class MemSim:
-    """MemSim"""
+class MainWindow:
+    """ MemSim
+    Main Window
+    """
     def __init__(self, parent):
         """__init__
 
         :param parent:
         """
+        self.parent = parent
         parent.title("MemSim")
         parent.geometry("800x640")
 
         # CREATE and PACK
-        Process(parent)
+        self.process_panel = ProcessPanel(parent)
 
 def main():
     """main"""
     root = tk.Tk()
-    MemSim(root)
+    MainWindow(root)
     root.mainloop()
 
 if __name__ == "__main__":

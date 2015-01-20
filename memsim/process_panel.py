@@ -1,12 +1,17 @@
 """ Main File """
 import tkinter as tk
+from tkinter import StringVar
 
-class Process:
+
+class ProcessPanel:
     """Process:"""
     def __init__(self, parent):
         """__init__
+        Create the Process Panel so that users can input Process Details.
 
         :param parent:
+        The Parent parameter is the Main Window (root) because this panel is
+        just part of that main window.
         """
         self.frame = tk.LabelFrame(parent,
                                    text="Create Process",
@@ -16,6 +21,7 @@ class Process:
 
         # Process Name
         tk.Label(self.frame, text="Process Name: ").pack()
+        self.process_name = StringVar()
         self.entry_name = tk.Entry(self.frame)
         self.entry_name.pack(pady=5)
 
@@ -25,11 +31,14 @@ class Process:
         self.entry_size.pack(pady=5)
 
         # Create Process Button
-        tk.Button(self.frame,
-                  text="Create Process",
-                  command=self.get_process).pack()
+        self.button = tk.Button(self.frame,
+                                text="Create Process",
+                                command=self.check_process_details)
+        self.button.pack()
 
-
-    def get_process(self):
+    def check_process_details(self):
         """get_process"""
-        return self.entry_name.get(), self.entry_size.get()
+        if self.entry_name.get().isalpha():
+            print("Yes!")
+        else:
+            print("No!")
