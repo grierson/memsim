@@ -2,6 +2,8 @@
 from memsim.process_panel import ProcessPanel
 import tkinter
 
+new_panel = ProcessPanel(tkinter.Tk())
+
 @given(u'I what to create a new process')
 def given_i_want_to_create_process(context):
     """given_i_want_to_create_process
@@ -16,10 +18,9 @@ def when_i_enter_process_details(context, process_name, process_size):
 
     :param context:
     """
-    new_panel = ProcessPanel(tkinter.Tk())
-    new_panel.process_name = process_name
-    new_panel.process_size = process_size
-    new_panel.check_process_details()
+    new_panel.process_name.set(process_name)
+    new_panel.process_size.set(process_size)
+    new_panel.validate_process_details()
 
 
 @then(u'process "{process_name}" with "{process_size}" is created')

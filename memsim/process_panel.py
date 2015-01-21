@@ -1,6 +1,8 @@
 """ Main File """
 import tkinter as tk
-from tkinter import StringVar
+import tkinter.messagebox
+from tkinter import (StringVar,
+                     IntVar)
 
 
 class ProcessPanel:
@@ -22,23 +24,33 @@ class ProcessPanel:
         # Process Name
         tk.Label(self.frame, text="Process Name: ").pack()
         self.process_name = StringVar()
-        self.entry_name = tk.Entry(self.frame)
+        self.entry_name = tk.Entry(self.frame, textvariable=self.process_name)
         self.entry_name.pack(pady=5)
 
         # Process Size
         tk.Label(self.frame, text="Process Size: ").pack()
-        self.entry_size = tk.Entry(self.frame)
+        self.process_size = IntVar()
+        self.entry_size = tk.Entry(self.frame, textvariable=self.process_size)
         self.entry_size.pack(pady=5)
 
         # Create Process Button
         self.button = tk.Button(self.frame,
                                 text="Create Process",
-                                command=self.check_process_details)
+                                command=lambda: self.validate_process_details())
         self.button.pack()
 
-    def check_process_details(self):
+    def validate_process_details(self):
         """get_process"""
-        if self.entry_name.get().isalpha():
-            print("Yes!")
+        if not self.process_name.get().isalpha():
+            tkinter.messagebox.showerror("Error!",
+                                         "Name must only contain letters")
+        elif type(self.process_size.get()) is not int:
+            tkinter.messagebox.showerror("Error!",
+                                         "Size must only contain numbers")
+        elif self.process_size.get() <= 0:
+            tkinter.messagebox.showerror("Error!",
+                                         "Size must be larger than 0")
+        #elif self.entry_name in process_list:
         else:
-            print("No!")
+            print("Create Process")
+            return True
