@@ -1,0 +1,46 @@
+<testsuite errors="0" failures="0" name="process_panel.Input Process Details" skipped="0" tests="3" time="0.000645"><testcase classname="process_panel.Input Process Details" name="Successfully input correct process details -- @1.1 " status="passed" time="0.000205"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario Outline: Successfully input correct process details -- @1.1 
+    Given I what to create a new process ... passed in 0.000s
+    When I enter name: "Calculator" with size: "100" ... passed in 0.000s
+    Then process "Calculator" with "100" is created ... passed in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+Create Process
+
+]]>
+</system-out></testcase><testcase classname="process_panel.Input Process Details" name="Successfully input correct process details -- @1.2 " status="passed" time="0.00024"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario Outline: Successfully input correct process details -- @1.2 
+    Given I what to create a new process ... passed in 0.000s
+    When I enter name: "Vim" with size: "800" ... passed in 0.000s
+    Then process "Vim" with "800" is created ... passed in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+Create Process
+
+]]>
+</system-out></testcase><testcase classname="process_panel.Input Process Details" name="Successfully input correct process details -- @1.3 " status="passed" time="0.0002"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario Outline: Successfully input correct process details -- @1.3 
+    Given I what to create a new process ... passed in 0.000s
+    When I enter name: "Clock" with size: "30" ... passed in 0.000s
+    Then process "Clock" with "30" is created ... passed in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+Create Process
+
+]]>
+</system-out></testcase></testsuite>

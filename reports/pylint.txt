@@ -1,15 +1,16 @@
 ************* Module memsim
 C:  1, 0: Missing module docstring (missing-docstring)
-************* Module memsim.process
-R:  4, 0: Too few public methods (1/2) (too-few-public-methods)
 ************* Module memsim.main
-F:  3, 0: Unable to import 'process' (import-error)
+F:  3, 0: Unable to import 'process_panel' (import-error)
 R:  5, 0: Too few public methods (0/2) (too-few-public-methods)
+************* Module memsim.process_panel
+W: 39,40: Lambda may not be necessary (unnecessary-lambda)
+R:  8, 0: Too few public methods (1/2) (too-few-public-methods)
 
 
 Report
 ======
-29 statements analysed.
+41 statements analysed.
 
 Messages by category
 --------------------
@@ -21,10 +22,21 @@ Messages by category
 +-----------+-------+---------+-----------+
 |refactor   |2      |2        |=          |
 +-----------+-------+---------+-----------+
-|warning    |0      |0        |=          |
+|warning    |1      |1        |=          |
 +-----------+-------+---------+-----------+
 |error      |0      |0        |=          |
 +-----------+-------+---------+-----------+
+
+
+
+% errors / warnings by module
+-----------------------------
+
++---------------------+------+--------+---------+-----------+
+|module               |error |warning |refactor |convention |
++=====================+======+========+=========+===========+
+|memsim.process_panel |0.00  |100.00  |50.00    |0.00       |
++---------------------+------+--------+---------+-----------+
 
 
 
@@ -36,6 +48,8 @@ Messages
 +=======================+============+
 |too-few-public-methods |2           |
 +-----------------------+------------+
+|unnecessary-lambda     |1           |
++-----------------------+------------+
 |missing-docstring      |1           |
 +-----------------------+------------+
 |import-error           |1           |
@@ -45,7 +59,7 @@ Messages
 
 Global evaluation
 -----------------
-Your code has been rated at 8.97/10 (previous run: 8.97/10, +0.00)
+Your code has been rated at 9.02/10 (previous run: 9.02/10, +0.00)
 
 Statistics by type
 ------------------
@@ -83,13 +97,13 @@ Raw metrics
 +----------+-------+------+---------+-----------+
 |type      |number |%     |previous |difference |
 +==========+=======+======+=========+===========+
-|code      |36     |64.29 |36       |=          |
+|code      |51     |60.71 |51       |=          |
 +----------+-------+------+---------+-----------+
-|docstring |14     |25.00 |14       |=          |
+|docstring |22     |26.19 |22       |=          |
 +----------+-------+------+---------+-----------+
-|comment   |1      |1.79  |1        |=          |
+|comment   |4      |4.76  |4        |=          |
 +----------+-------+------+---------+-----------+
-|empty     |5      |8.93  |5        |=          |
+|empty     |7      |8.33  |7        |=          |
 +----------+-------+------+---------+-----------+
 
 

@@ -111,7 +111,7 @@ def report_bdd():
     """report_sbe"""
     sh('behave --junit --junit-directory=reports/')
 
-@needs('report_acceptance', 'report_cov', 'report_pylint')
+@needs('report_bdd', 'report_cov', 'report_pylint')
 def report():
     """report"""
     pass
