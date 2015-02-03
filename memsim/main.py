@@ -1,27 +1,25 @@
 """ Main File """
 import tkinter as tk
-from process_panel import ProcessPanel
+from process_panel import process_panel
+from scheduler import ram_canvas
 
-class MainWindow:
-    """ MemSim
-    Main Window
+def mainwindow(parent):
+    """__init__
+
+    :param parent:
     """
-    def __init__(self, parent):
-        """__init__
+    parent.title("MemSim")
+    parent.geometry("800x640")
 
-        :param parent:
-        """
-        self.parent = parent
-        parent.title("MemSim")
-        parent.geometry("800x640")
+    # CREATE and PACK
+    process_panel(parent)
+    ram_canvas(parent)
 
-        # CREATE and PACK
-        self.process_panel = ProcessPanel(parent)
 
 def main():
     """main"""
     root = tk.Tk()
-    MainWindow(root)
+    mainwindow(root)
     root.mainloop()
 
 if __name__ == "__main__":

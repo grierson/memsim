@@ -9,9 +9,5 @@ class TestProcessPanel(unittest.TestCase):
     def setUp(self):
         """setUp"""
         self.new_panel = ProcessPanel(tkinter.Tk())
+        pass
 
-    def test_process_details(self):
-        """test_process_details"""
-        self.new_panel.process_name.set("Firefox")
-        self.new_panel.process_size.set(500)
-        self.assertTrue(self.new_panel.validate_process_details())

@@ -3,54 +3,65 @@ import tkinter as tk
 import tkinter.messagebox
 from tkinter import (StringVar,
                      IntVar)
+from scheduler import add_process
 
 
-class ProcessPanel:
-    """Process:"""
-    def __init__(self, parent):
-        """__init__
-        Create the Process Panel so that users can input Process Details.
+def process_panel(parent):
+    """process_panel
 
-        :param parent:
-        The Parent parameter is the Main Window (root) because this panel is
-        just part of that main window.
-        """
-        self.frame = tk.LabelFrame(parent,
-                                   text="Create Process",
-                                   padx=5,
-                                   pady=5)
-        self.frame.pack(anchor="nw", padx=5, pady=5)
+    Create the Process Panel so that users can input Process Details.
 
-        # Process Name
-        tk.Label(self.frame, text="Process Name: ").pack()
-        self.process_name = StringVar()
-        self.entry_name = tk.Entry(self.frame, textvariable=self.process_name)
-        self.entry_name.pack(pady=5)
+    :param parent:
+    The Parent parameter is the Main Window (root)
+    This panel is just part of that main window.
+    """
+    frame = tk.LabelFrame(parent,
+                          text="Create Process",
+                          padx=5,
+                          pady=5)
+    frame.pack(anchor="nw", padx=5, pady=5)
 
-        # Process Size
-        tk.Label(self.frame, text="Process Size: ").pack()
-        self.process_size = IntVar()
-        self.entry_size = tk.Entry(self.frame, textvariable=self.process_size)
-        self.entry_size.pack(pady=5)
+    # Create Name
+    tk.Label(frame, text="Process Name: ").pack()
+    process_name = StringVar()
+    entry_name = tk.Entry(frame, textvariable=process_name)
+    entry_name.pack(pady=5)
 
-        # Create Process Button
-        self.button = tk.Button(self.frame,
-                                text="Create Process",
-                                command=lambda: self.validate_process_details())
-        self.button.pack()
+    # Create Size
+    tk.Label(frame, text="Process Size: ").pack()
+    process_size = IntVar()
+    entry_size = tk.Entry(frame, textvariable=process_size)
+    entry_size.pack(pady=5)
 
-    def validate_process_details(self):
-        """get_process"""
-        if not self.process_name.get().isalpha():
-            tkinter.messagebox.showerror("Error!",
-                                         "Name must only contain letters")
-        elif type(self.process_size.get()) is not int:
-            tkinter.messagebox.showerror("Error!",
-                                         "Size must only contain numbers")
-        elif self.process_size.get() <= 0:
-            tkinter.messagebox.showerror("Error!",
-                                         "Size must be larger than 0")
-        #elif self.entry_name in process_list:
-        else:
-            print("Create Process")
-            return True
+    # Create Process Button
+    # Disable Unnecessary Lambda Call because it is to prevent tkinter from
+    # running the code when first loaded
+    # pylint: disable=W0108
+    button = tk.Button(frame,
+                       text="Create Process",
+                       command=lambda:
+                       validate_process_details(process_name.get(),
+                                                process_size.get()))
+    button.pack()
+
+
+def validate_process_details(process_name, process_size):
+    """validate_process_details
+    Validate the users input is correct otherwise show error.
+
+    :param process_name -> String:
+    Must only be Letters
+    :param process_size -> Int:
+    Must only be Numbers
+    """
+    if not process_name.isalpha():
+        tkinter.messagebox.showerror("Error!",
+                                     "Name must only contain letters")
+    elif not str(process_size).isdigit():
+        tkinter.messagebox.showerror("Error!",
+                                     "Size must only contain numbers")
+    elif process_size <= 0:
+        tkinter.messagebox.showerror("Error!",
+                                     "Size must be larger than 0")
+    else:
+        add_process(process_name, process_size)
