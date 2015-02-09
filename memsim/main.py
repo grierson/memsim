@@ -1,25 +1,27 @@
+#!/usr/bin/env python
 """ Main File """
 import tkinter as tk
-from process_panel import process_panel
-from scheduler import ram_canvas
+from process_panel import processpanel
+from scheduler import Scheduler
 
-def mainwindow(parent):
+class Mainwindow(tk.Frame):
     """__init__
 
     :param parent:
     """
-    parent.title("MemSim")
-    parent.geometry("800x640")
+    def __init__(self, parent=None):
+        tk.Frame.__init__(self, parent)
+        parent.title("MemSim")
+        parent.geometry("800x640")
 
-    # CREATE and PACK
-    process_panel(parent)
-    ram_canvas(parent)
+        sch = Scheduler(parent)
+        processpanel(parent, sch)
 
 
 def main():
     """main"""
     root = tk.Tk()
-    mainwindow(root)
+    Mainwindow(root)
     root.mainloop()
 
 if __name__ == "__main__":

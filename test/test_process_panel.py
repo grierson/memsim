@@ -1,13 +1,7 @@
-""" Test Process Panel Module """
-import unittest
-from memsim.process_panel import ProcessPanel
-import tkinter
+from unittest import TestCase
+
+__author__ = 'kyle'
 
 
-class TestProcessPanel(unittest.TestCase):
-    """TestProcessPanel"""
-    def setUp(self):
-        """setUp"""
-        self.new_panel = ProcessPanel(tkinter.Tk())
-        pass
-
+class TestProcess_panel(TestCase):
+    pass

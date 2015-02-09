@@ -1,4 +1,4 @@
-<testsuite errors="0" failures="0" name="process_panel.Input Process Details" skipped="0" tests="3" time="0.000645"><testcase classname="process_panel.Input Process Details" name="Successfully input correct process details -- @1.1 " status="passed" time="0.000205"><system-out>
+<testsuite errors="0" failures="0" name="process_panel.Input Process Details" skipped="0" tests="3" time="0.000403"><testcase classname="process_panel.Input Process Details" name="Successfully input correct process details -- @1.1 " status="passed" time="0.00015"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario Outline: Successfully input correct process details -- @1.1 
@@ -8,12 +8,8 @@
 
 @scenario.end
 --------------------------------------------------------------------------------
-
-Captured stdout:
-Create Process
-
 ]]>
-</system-out></testcase><testcase classname="process_panel.Input Process Details" name="Successfully input correct process details -- @1.2 " status="passed" time="0.00024"><system-out>
+</system-out></testcase><testcase classname="process_panel.Input Process Details" name="Successfully input correct process details -- @1.2 " status="passed" time="0.000132"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario Outline: Successfully input correct process details -- @1.2 
@@ -23,12 +19,8 @@ Create Process
 
 @scenario.end
 --------------------------------------------------------------------------------
-
-Captured stdout:
-Create Process
-
 ]]>
-</system-out></testcase><testcase classname="process_panel.Input Process Details" name="Successfully input correct process details -- @1.3 " status="passed" time="0.0002"><system-out>
+</system-out></testcase><testcase classname="process_panel.Input Process Details" name="Successfully input correct process details -- @1.3 " status="passed" time="0.000121"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario Outline: Successfully input correct process details -- @1.3 
@@ -38,9 +30,5 @@ Create Process
 
 @scenario.end
 --------------------------------------------------------------------------------
-
-Captured stdout:
-Create Process
-
 ]]>
 </system-out></testcase></testsuite>
