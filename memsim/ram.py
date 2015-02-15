@@ -1,20 +1,17 @@
-""" Process Scheduler """
+""" RAM Canvas """
 import tkinter as tk
 import tkinter.messagebox
 import random
 
 
-class Scheduler():
-    """Schduler"""
+class Ram(tk.Canvas):
+    """Ram"""
     def __init__(self, parent):
         """__init__
 
         :param parent:
         """
-        frame = tk.Frame(parent)
-        frame.place(in_=parent, anchor="n")
-        self.ram = tk.Canvas(frame, bg="white", height=600, width=200)
-        self.ram.pack(anchor="e")
+        tk.Canvas.__init__(self, parent, bg="white", width=200, height=450)
         self.processes = {}
         self.ram_size = 0
 
@@ -62,8 +59,8 @@ class Scheduler():
         """update_ram"""
         colours = ["red", "orange", "yellow", "green", "blue", "violet"]
         for process in self.processes:
-            self.ram.create_rectangle(0, self.ram_size, 0, process,
-                                      fill=random.choice(colours))
+            self.create_rectangle(0, self.ram_size, 0, process,
+                                  fill=random.choice(colours))
             self.ram_size = process
             if self.ram_size >= 1000:
                 tkinter.messagebox.showerror("Error!",
