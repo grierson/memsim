@@ -24,8 +24,8 @@ class Mainwindow(tk.Tk):
         processpanel = Processpanel(container, ram)
         processpanel.grid(row=0, column=0, sticky="news")
 
-        ram = Ram(container)
         ram.grid(row=0, column=1, sticky="news", rowspan=2)
+
 
 
 if __name__ == "__main__":

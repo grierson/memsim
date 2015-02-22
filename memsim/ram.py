@@ -13,7 +13,6 @@ class Ram(tk.Canvas):
         """
         tk.Canvas.__init__(self, parent, bg="white", width=200, height=450)
         self.processes = {}
-        self.ram_size = 0
 
     def validate_process(self, process_name, process_size):
         """validate_process_details
@@ -51,10 +50,8 @@ class Ram(tk.Canvas):
     def update_ram(self):
         """update_ram"""
         colours = ["red", "orange", "yellow", "green", "blue", "violet"]
+        ram_size = 0
+
         for process in self.processes.values():
-            self.create_rectangle(0, self.ram_size, 0, process,
-                                  fill=random.choice(colours))
-            self.ram_size = process
-            if self.ram_size >= 1000:
-                tkinter.messagebox.showerror("Error!",
-                                             "Buffer Overflow")
+            self.create_rectangle(0, ram_size, 200, process, fill=random.choice(colours))
+            ram_size += process
