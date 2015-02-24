@@ -12,7 +12,7 @@ class Ram(tk.Canvas):
         :param parent:
         """
         tk.Canvas.__init__(self, parent, bg="white", width=200, height=450)
-        self.processes = {}
+        self.processes = {"red", "green", "blue"}
 
     def validate_process(self, process_name, process_size):
         """validate_process_details
@@ -40,18 +40,21 @@ class Ram(tk.Canvas):
 
     def add_process(self, process_name, process_size):
         """add_process
+        Added new process to Processes List
 
-        :param process:
+        :param process_name:
+        :param process_size:
         """
-        self.processes[process_name] = process_size
-        self.update_ram()
-
-
-    def update_ram(self):
-        """update_ram"""
         colours = ["red", "orange", "yellow", "green", "blue", "violet"]
-        ram_size = 0
 
-        for process in self.processes.values():
-            self.create_rectangle(0, ram_size, 200, process, fill=random.choice(colours))
-            ram_size += process
+        self.processes[process_name] = process_size
+        # X, Y, Width (FIXED), Height, Fill
+        self.create_rectangle(0,
+                              0,
+                              200,
+                              200,
+                              fill=random.choice(colours))
+
+    def kill_process(self):
+        """kill_process"""
+        self.processes.pop()

@@ -20,13 +20,16 @@ class Processpanel(tk.LabelFrame):
         """
         tk.LabelFrame.__init__(self, parent, text="Create Process")
         tk.Label(self, text="Process Name:").grid(row=0)
-        self.process_name = tk.StringVar()
-        tk.Entry(self, textvariable=self.process_name).grid(row=0, column=1)
+        process_name = tk.StringVar()
+        tk.Entry(self, textvariable=process_name).grid(row=0, column=1)
         tk.Label(self, text="Process Size:").grid(row=1)
-        self.process_size = tk.IntVar()
-        tk.Entry(self, textvariable=self.process_size).grid(row=1, column=1)
+        process_size = tk.IntVar()
+        tk.Entry(self, textvariable=process_size).grid(row=1, column=1)
         tk.Button(self, text="Create Process",
-                  command=lambda: self.check_process(ram)).grid(row=2, column=1)
+                  command=lambda:
+                  ram.validate_process(process_name.get(),
+                                       process_size.get())).grid(row=2,
+                                                                 column=1)
 
         tk.Label(self, text="Allocation Policies").grid(row=3, column=0)
 
@@ -36,6 +39,11 @@ class Processpanel(tk.LabelFrame):
 
         tk.Button(self, text="Compact").grid(row=7, column=0)
 
-    def check_process(self, ram):
-        """check_process"""
-        ram.validate_process(self.process_name.get(), self.process_size.get())
+        tk.Label(self, text="Process List").grid(row=8, column=0)
+        var = tk.StringVar(self)
+        self.selected = tk.OptionMenu(self,
+                                      var,
+                                      *ram.processes).grid(row=8, column=1)
+        var.set("ps")
+        tk.Button(self, text="Kill Process", command=lambda:
+                  ram.kill_process()).grid(row=9, column=0)
