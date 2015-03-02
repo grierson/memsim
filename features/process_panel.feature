@@ -1,11 +1,12 @@
 Feature: Input Process Details
     As a Student
-    I want to create Processes
-    So that I can add processes to RAM
-    Scenario Outline: Successfully input correct process details
-        Given I what to create a new process
-        When I enter name: "<process_name>" with size: "<process_size>"
-        Then process "<process_name>" with "<process_size>" is created 
+    I want to input Process details
+    So that I can create processes
+
+    Scenario Outline: Successfully input valid process details
+        Given I enter process details "<process_name>", "<process_size>"
+        When I press the create button
+        Then process "<process_name>", "<process_size>" is created
     Examples:
         | process_name | process_size |
         | Calculator   | 100          |

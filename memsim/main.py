@@ -1,7 +1,11 @@
 #!/usr/bin/env python
 """ Main File """
-import tkinter as tk
-from process_panel import Processpanel
+try:
+    import Tkinter as tk
+except:
+    import tkinter as tk
+from process_panel import ProcessPanel
+#from policies_panel import PoliciesPanel
 from ram import Ram
 
 class Mainwindow(tk.Tk):
@@ -18,14 +22,15 @@ class Mainwindow(tk.Tk):
         tk.Tk.wm_geometry(self)
 
         container = tk.Frame(self, bg="red")
-        container.pack(side="top", fill="both", expand=True)
+        container.pack()
 
         ram = Ram(container)
-        processpanel = Processpanel(container, ram)
+        processpanel = ProcessPanel(container, ram)
+        #policiespanel = PoliciesPanel(container, ram)
+
         processpanel.grid(row=0, column=0, sticky="news")
-
+        #policiespanel.grid(row=1, column=0, sticky="news")
         ram.grid(row=0, column=1, sticky="news", rowspan=2)
-
 
 
 if __name__ == "__main__":

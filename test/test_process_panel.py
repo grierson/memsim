@@ -1,6 +1,6 @@
 """ TEST Process Panel """
 from unittest import TestCase
-from memsim.process_panel import Processpanel
+from memsim.process_panel import ProcessPanel
 import tkinter as tk
 
 
