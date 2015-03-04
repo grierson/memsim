@@ -1,21 +1,24 @@
-""" RAM Canvas """
+""" Memory Canvas """
 try:
     import Tkinter as tk
     import tkMessageBox as messagebox
-except:
+except ImportError:
     import tkinter as tk
     import tkinter.messagebox as messagebox
+from process import Process
+
+M_WIDTH = 200
 
 
-class Ram(tk.Canvas):
+class Memory(tk.Canvas):
     """Ram"""
     def __init__(self, parent):
         """__init__
 
         :param parent:
         """
-        tk.Canvas.__init__(self, parent, bg="white", width=200, height=450)
-        self.processes = {}
+        tk.Canvas.__init__(self, parent, bg="white", width=M_WIDTH, height=450)
+        self.processes = ["vim", "firefox", "word"]
 
     def validate_process(self, process_name, process_size):
         """validate_process_details
@@ -35,13 +38,20 @@ class Ram(tk.Canvas):
         elif process_size <= 0:
             messagebox.showerror("Error!",
                                  "Size must be larger than 0")
-        elif process_name in self.processes:
+        elif self.find_withtag(process_name):
             messagebox.showerror("Error!",
                                  "Process Already Exists")
         else:
-            # Add entered Process to Processes
-            self.processes[process_name] = process_size
+            self.create_rectangle(0,
+                                  0,
+                                  M_WIDTH,
+                                  process_size,
+                                  fill="red",
+                                  tag=process_name)
+            self.processes.append(process_name)
 
-    def kill_process(self, process_name):
-        """kill_process"""
-        self.processes.pop(process_name, None)
+    def kill(self, process_name):
+        """kill"""
+        print(process_name)
+        if self.find_withtag(process_name):
+            self.delete(process_name)
