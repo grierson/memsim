@@ -39,3 +39,4 @@ class ProcessPanel(tk.LabelFrame):
                   ram.validate_process(process_name.get(),
                                        process_size.get())).grid(row=2,
                                                                  column=1)
+

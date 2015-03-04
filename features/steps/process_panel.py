@@ -3,6 +3,7 @@ from behave import (given,
                     when,
                     then)
 from memsim.process_panel import ProcessPanel
+from memsim.memory import Memory
 import tkinter as tk
 
 @given(u'I enter process details "{process_name}", "{process_size}"')
@@ -13,7 +14,9 @@ def given_process_details(context, process_name, process_size):
     :param process_name:
     :param process_size:
     """
-    context.panel = ProcessPanel(tk.Tk())
+    context.parent = tk.Tk()
+    ram = Memory(context.parent)
+    context.panel = ProcessPanel(context.parent, ram)
     context.panel.process_name = process_name
     context.panel.process_size = process_size
 

@@ -5,8 +5,8 @@ try:
 except:
     import tkinter as tk
 from process_panel import ProcessPanel
-#from policies_panel import PoliciesPanel
-from ram import Ram
+from policies_panel import PoliciesPanel
+from memory import Memory
 
 class Mainwindow(tk.Tk):
     """Mainwindow"""
@@ -24,12 +24,12 @@ class Mainwindow(tk.Tk):
         container = tk.Frame(self, bg="red")
         container.pack()
 
-        ram = Ram(container)
+        ram = Memory(container)
         processpanel = ProcessPanel(container, ram)
-        #policiespanel = PoliciesPanel(container, ram)
+        policiespanel = PoliciesPanel(container, ram)
 
         processpanel.grid(row=0, column=0, sticky="news")
-        #policiespanel.grid(row=1, column=0, sticky="news")
+        policiespanel.grid(row=1, column=0, sticky="news")
         ram.grid(row=0, column=1, sticky="news", rowspan=2)
 
 
