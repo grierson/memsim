@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """ Memory Canvas """
 try:
     import tkinter as tk
@@ -31,15 +32,19 @@ class Memory(tk.Canvas):
         if not process_name.isalpha():
             messagebox.showerror("Error!",
                                  "Name must only contain letters")
+            return TypeError
         elif not str(process_size).isdigit():
             messagebox.showerror("Error!",
                                  "Size must only contain numbers")
-        elif process_size <= 0:
+            return TypeError
+        elif int(process_size) <= 0:
             messagebox.showerror("Error!",
                                  "Size must be larger than 0")
+            return ValueError
         elif self.find_withtag(process_name):
             messagebox.showerror("Error!",
                                  "Process Already Exists")
+            return ValueError
         else:
             self.create_rectangle(0,
                                   0,

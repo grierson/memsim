@@ -12,3 +12,4 @@ Feature: Input Process Details
         | Calculator   | 100          |
         | Vim          | 800          |
         | Clock        | 30           |
+        | Clock        | 40           |
