@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 """ Main File """
 try:
-    import Tkinter as tk
-except:
     import tkinter as tk
+except ImportError:
+    import Tkinter as tk
 from process_panel import ProcessPanel
 from policies_panel import PoliciesPanel
 from memory import Memory

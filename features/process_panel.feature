@@ -6,7 +6,7 @@ Feature: Input Process Details
     Scenario Outline: Successfully input valid process details
         Given I enter process details "<process_name>", "<process_size>"
         When I press the create button
-        Then process "<process_name>", "<process_size>" is created
+        Then process is created
     Examples:
         | process_name | process_size |
         | Calculator   | 100          |

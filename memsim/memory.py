@@ -1,11 +1,10 @@
 """ Memory Canvas """
 try:
-    import Tkinter as tk
-    import tkMessageBox as messagebox
-except ImportError:
     import tkinter as tk
     import tkinter.messagebox as messagebox
-from process import Process
+except ImportError:
+    import Tkinter as tk
+    import tkMessageBox as messagebox
 
 M_WIDTH = 200
 

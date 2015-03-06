@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 """ Main File """
-import tkinter as tk
+try:
+    import tkinter as tk
+except ImportError:
+    import Tkinter as tk
 
 
 class PoliciesPanel(tk.LabelFrame):
