@@ -6,8 +6,10 @@ try:
 except ImportError:
     import Tkinter as tk
     import tkMessageBox as messagebox
+import random
 
 M_WIDTH = 200
+M_HIGHT = 450
 
 
 class Memory(tk.Canvas):
@@ -17,8 +19,13 @@ class Memory(tk.Canvas):
 
         :param parent:
         """
-        tk.Canvas.__init__(self, parent, bg="white", width=M_WIDTH, height=450)
-        self.processes = ["vim", "firefox", "word"]
+        tk.Canvas.__init__(self,
+                           parent,
+                           bg="white",
+                           width=M_WIDTH,
+                           height=M_HIGHT)
+        self.processes = {}
+        self.colours = ["red", "blue", "green", "cyan", "yellow", "magenta"]
 
     def validate_process(self, process_name, process_size):
         """validate_process_details
@@ -46,13 +53,48 @@ class Memory(tk.Canvas):
                                  "Process Already Exists")
             return ValueError
         else:
-            self.create_rectangle(0,
-                                  0,
-                                  M_WIDTH,
-                                  process_size,
-                                  fill="red",
-                                  tag=process_name)
-            self.processes.append(process_name)
+            self.first_fit(process_name, process_size)
+
+    def first_fit(self, process_name, process_size):
+        """first_fit
+
+        :param process_name:
+        :param process_size:
+        """
+        hole = 0
+        hole_address = 0
+
+        for address in range(M_HIGHT):
+            if address in self.processes:
+                address += self.processes[address]['size']
+                hole_address = address
+                hole = 0
+            elif process_size == hole:
+                self.create_process(process_name, process_size, hole_address)
+                break
+            else:
+                hole += 1
+
+    def create_process(self, process_name, process_size, process_address):
+        """create_process
+
+        :param process_name:
+        :param process_size:
+        """
+        self.create_rectangle(0,
+                              process_address,
+                              M_WIDTH,
+                              process_size,
+                              fill=random.choice(self.colours),
+                              width=1,
+                              tag=process_name)
+        self.create_text(M_WIDTH / 2,
+                         process_address + 20,
+                         text=process_name,
+                         font=("Helvetica", 28),
+                         tag=process_name)
+        self.processes[process_address] = {"name": process_name,
+                                           "size":process_size}
 
     def kill(self, process_name):
         """kill"""

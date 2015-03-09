@@ -32,6 +32,7 @@ class PoliciesPanel(tk.LabelFrame):
         tk.Button(self, text="Compact").grid(row=4, column=0)
 
         tk.Label(self, text="Process List").grid(row=5, column=0)
+        '''
         self.var = tk.StringVar()
         self.var.set(ram.processes[0])
         self.selected = tk.OptionMenu(self,
@@ -41,3 +42,4 @@ class PoliciesPanel(tk.LabelFrame):
                   text="Kill Process",
                   command=lambda:
                   ram.kill(self.var.get())).grid(row=6, column=0)
+        '''
