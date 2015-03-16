@@ -24,7 +24,7 @@ class Memory(tk.Canvas):
                            bg="white",
                            width=M_WIDTH,
                            height=M_HIGHT)
-        self.processes = {}
+        self.processes = []
         self.colours = ["red", "blue", "green", "cyan", "yellow", "magenta"]
 
     def validate_process(self, process_name, process_size):
@@ -65,36 +65,33 @@ class Memory(tk.Canvas):
         hole_address = 0
 
         for address in range(M_HIGHT):
-            if address in self.processes:
-                address += self.processes[address]['size']
-                hole_address = address
-                hole = 0
-            elif process_size == hole:
+            for process in self.processes:
+                if address == self.coords(process)[0]:
+                    address += self.coords(process)[3]
+                    hole_address = address
+                    hole = 0
+            if process_size == hole:
                 self.create_process(process_name, process_size, hole_address)
                 break
             else:
                 hole += 1
 
-    def create_process(self, process_name, process_size, process_address):
+    def create_process(self, process_name, process_size, address):
         """create_process
 
         :param process_name:
         :param process_size:
         """
-        self.create_rectangle(0,
-                              process_address,
-                              M_WIDTH,
-                              process_size,
-                              fill=random.choice(self.colours),
-                              width=1,
-                              tag=process_name)
-        self.create_text(M_WIDTH / 2,
-                         process_address + 20,
-                         text=process_name,
-                         font=("Helvetica", 28),
-                         tag=process_name)
-        self.processes[process_address] = {"name": process_name,
-                                           "size":process_size}
+        self.processes.append(
+            self.create_rectangle(0, 
+                                  address,
+                                  M_WIDTH,
+                                  process_size,
+                                  fill=random.choice(self.colours),
+                                  width=1,
+                                  tag=process_name
+                                  )
+        )
 
     def kill(self, process_name):
         """kill"""

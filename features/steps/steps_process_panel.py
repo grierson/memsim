@@ -36,4 +36,4 @@ def then_create_process(context):
 
     :param context:
     """
-    assert context.process_name in context.ram.processes, True
+    assert context.process_name in context.ram.processes.gettags(), True

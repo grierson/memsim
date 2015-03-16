@@ -6,5 +6,5 @@ class TestMemory(unittest.TestCase):
     """TestMemory"""
     def test_validate_process(self):
         """test_validate_process"""
-        pass
+        ram = Memory
 
