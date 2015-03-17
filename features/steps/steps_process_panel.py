@@ -26,8 +26,8 @@ def when_button_pressed(context):
 
     :param context:
     """
-    context.ram.validate_process(context.process_name,
-                                 context.process_size)
+    assert context.ram.validate_process(context.process_name, 
+                                        context.process_size)
 
 
 @then(u'process is created')
@@ -36,4 +36,4 @@ def then_create_process(context):
 
     :param context:
     """
-    assert context.process_name in context.ram.processes.gettags(), True
+    assert True

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """ TEST Process Panel """
 from unittest import TestCase
-from memsim.main import Mainwindow
-from memsim.process_panel import ProcessPanel
-from memsim.memory import Memory
+from source.main import Mainwindow
+from source.memory import Memory
+from source.process_panel import ProcessPanel
 import tkinter as tk
 
 
