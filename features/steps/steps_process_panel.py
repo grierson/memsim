@@ -2,8 +2,8 @@
 from behave import (given,
                     when,
                     then)
-from memsim.process_panel import ProcessPanel
-from memsim.memory import Memory
+from source.process_panel import ProcessPanel
+from source.memory import Memory
 import tkinter as tk
 
 @given(u'I enter process details "{process_name}", "{process_size}"')
