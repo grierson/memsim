@@ -71,20 +71,28 @@ class Memory(tk.Canvas):
         :param process_name:
         :param process_size:
         """
-        hole = 0
+        plist = []
+        for process in self.processes:
+            plist.append({"Address": self.coords(process)[0],
+                          "Size": self.coords(process)[3]}.copy())
+        
+        address = 0
+        hole_size = 0
         hole_address = 0
-
-        for address in range(M_HIGHT):
-            for process in self.processes:
-                if address == self.coords(process)[0]:
-                    address += self.coords(process)[3]
+        while address <= M_HIGHT:
+            for process in plist:
+                if process["Address"] == address:
+                    address += process["Size"]
+                    hole_size = 0
                     hole_address = address
-                    hole = 0
-            if process_size == hole:
+
+            if hole_size >= process_size:
                 self.create_process(process_name, process_size, hole_address)
+                address = 1000
                 break
             else:
-                hole += 1
+                hole_size += 1
+                address += 1
 
     def create_process(self, process_name, process_size, address):
         """create_process
