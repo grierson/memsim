@@ -73,18 +73,21 @@ class Memory(tk.Canvas):
         """
         plist = []
         for process in self.processes:
-            plist.append({"Address": self.coords(process)[0],
-                          "Size": self.coords(process)[3]}.copy())
-        
+            temp = {"Address": int(self.coords(process)[0]),
+                    "Size": int(self.coords(process)[3])}
+            plist.append(temp.copy())
+
         address = 0
         hole_size = 0
         hole_address = 0
+
         while address <= M_HIGHT:
             for process in plist:
-                if process["Address"] == address:
+                if address == process.get("Address", None):
                     address += process["Size"]
                     hole_size = 0
                     hole_address = address
+                    break
 
             if hole_size >= process_size:
                 self.create_process(process_name, process_size, hole_address)
@@ -101,7 +104,7 @@ class Memory(tk.Canvas):
         :param process_size:
         """
         self.processes.append(
-            self.create_rectangle(0, 
+            self.create_rectangle(0,
                                   address,
                                   M_WIDTH,
                                   process_size,
@@ -113,6 +116,5 @@ class Memory(tk.Canvas):
 
     def kill(self, process_name):
         """kill"""
-        print(process_name)
         if self.find_withtag(process_name):
             self.delete(process_name)

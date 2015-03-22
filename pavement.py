@@ -71,7 +71,7 @@ options(
 @task
 def run():
     """run"""
-    sh('python3 memsim/main.py')
+    sh('python3 source/main.py')
 
 @task
 def unit():
