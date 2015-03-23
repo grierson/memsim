@@ -79,7 +79,12 @@ def unit():
     sh('py.test test/')
 
 @task
-def bdd():
+def functional():
+    """bdd"""
+    sh('behave --tags=wip')
+
+@task
+def functional_all():
     """bdd"""
     sh('behave')
     

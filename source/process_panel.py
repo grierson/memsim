@@ -34,9 +34,9 @@ class ProcessPanel(tk.LabelFrame):
         tk.Entry(self, textvariable=process_size).grid(row=1, column=1)
 
         # Button
-        tk.Button(self, text="Create Process",
-                  command=lambda:
-                  ram.validate_process(process_name.get(),
-                                       process_size.get())).grid(row=2,
-                                                                 column=1)
-
+        self.create_button = tk.Button(self,
+                                       text="Create Process",
+                                       command=lambda:
+                                       ram.validate_process(process_name.get(),
+                                                            process_size.get()))
+        self.create_button.grid(row=2, column=1)

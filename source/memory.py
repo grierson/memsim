@@ -27,13 +27,10 @@ class Memory(tk.Canvas):
         self.processes = []
         self.colours = ["red", "blue", "green", "cyan", "yellow", "magenta"]
 
-    def get_process_list(self):
-        """ Return Each Process Name """
-        plist = []
-        for process in self.processes:
-            plist.append(self.gettags(process))
-
-        return plist
+    def check_process_exists(self, process_name):
+        """ Check whether process name is in Process List """
+        return any([self.gettags(process)[0] for process in self.processes if
+                    self.gettags(process)])
 
 
     def validate_process(self, process_name, process_size):
@@ -45,24 +42,24 @@ class Memory(tk.Canvas):
         :param process_size -> Int:
         Must only be Numbers
         """
+
         if not process_name.isalpha():
             messagebox.showerror("Error!",
                                  "Name must only contain letters")
-            return TypeError
+            raise TypeError
+
         elif not str(process_size).isdigit():
             messagebox.showerror("Error!",
                                  "Size must only contain numbers")
-            return TypeError
+            raise TypeError
+
         elif int(process_size) <= 0:
             messagebox.showerror("Error!",
                                  "Size must be larger than 0")
-            return ValueError
-        elif self.find_withtag(process_name):
-            messagebox.showerror("Error!",
-                                 "Process Already Exists")
-            return ValueError
+            raise ValueError
+
         else:
-            self.first_fit(process_name, process_size)
+            self.create_process(process_name, process_size)
             return True
 
     def first_fit(self, process_name, process_size):
@@ -97,7 +94,7 @@ class Memory(tk.Canvas):
                 hole_size += 1
                 address += 1
 
-    def create_process(self, process_name, process_size, address):
+    def create_process(self, process_name, process_size):
         """create_process
 
         :param process_name:
@@ -105,7 +102,7 @@ class Memory(tk.Canvas):
         """
         self.processes.append(
             self.create_rectangle(0,
-                                  address,
+                                  0,
                                   M_WIDTH,
                                   process_size,
                                   fill=random.choice(self.colours),
