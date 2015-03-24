@@ -1,7 +1,7 @@
 Feature: Input Process Details
     As a Student
     I want to input Process details
-    So that I add new processes to RAM
+    So that I add a new process to RAM
 
     @wip
     Scenario Outline: Successfully input valid process details
