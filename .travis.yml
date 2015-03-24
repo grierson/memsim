@@ -9,5 +9,10 @@ install:
         - "pip install -r requirements.txt"
 
 # command to run tests
-script: behave
-script: py.test
+script: 
+        - behave
+        - py.test --cov coveralls --cov-report 
+
+after_success:
+        - coveralls
+
