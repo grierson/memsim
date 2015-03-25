@@ -15,9 +15,9 @@ M_HIGHT = 450
 class Memory(tk.Canvas):
     """Ram"""
     def __init__(self, parent):
-        """__init__
+        """ (Tk.Frame) -> None
 
-        :param parent:
+        Create Process List
         """
         tk.Canvas.__init__(self,
                            parent,
@@ -28,45 +28,59 @@ class Memory(tk.Canvas):
         self.colours = ["red", "blue", "green", "cyan", "yellow", "magenta"]
 
     def check_process_exists(self, process_name):
-        """ Check whether process name is in Process List """
-        return any([self.gettags(process)[0] for process in self.processes if
-                    self.gettags(process)])
+        """ (string) -> Bool
 
+        Check whether process name is in Process List 
+        """
+        return any([self.gettags(process)[0] for process in self.processes if
+                    process_name in self.gettags(process)])
+
+    def get_process_coords(self, process_name):
+        """ (string) -> list of int
+
+        Get address for process
+        0 -> FIXED X Position 0 (Should fixed to the left side of canvas)
+        1 -> Process Address
+        2 -> FIXED WIDTH (M_WIDTH)
+        3 -> Process Size
+        """
+        return list(map(int, self.coords(process_name)))
+
+    def get_process_size(self, process_name):
+        """ (string) -> int
+
+        Get process size
+        """
+        return int(self.coords(process_name)[3])
+
+    def get_process_address(self, process_name):
+        """ (string) -> int
+
+        Get process address
+        """
+        return int(self.coords(process_name)[1])
 
     def validate_process(self, process_name, process_size):
-        """validate_process_details
+        """ (string, int) -> None
+
         Validate the users input is correct otherwise show error.
-
-        :param process_name -> String:
-        Must only be Letters
-        :param process_size -> Int:
-        Must only be Numbers
         """
-
         if not process_name.isalpha():
             messagebox.showerror("Error!",
                                  "Name must only contain letters")
-            raise TypeError
-
         elif not str(process_size).isdigit():
             messagebox.showerror("Error!",
                                  "Size must only contain numbers")
-            raise TypeError
-
         elif int(process_size) <= 0:
             messagebox.showerror("Error!",
                                  "Size must be larger than 0")
-            raise ValueError
-
         else:
-            self.create_process(process_name, process_size)
-            return True
+            self.first_fit(process_name, process_size)
 
     def first_fit(self, process_name, process_size):
-        """first_fit
+        """ (string, int) -> None
 
-        :param process_name:
-        :param process_size:
+        First Fit Allocation
         """
         plist = []
         for process in self.processes:
@@ -81,7 +95,7 @@ class Memory(tk.Canvas):
         while address <= M_HIGHT:
             for process in plist:
                 if address == process.get("Address", None):
-                    address += process["Size"]
+                    address += process.get("Size", None)
                     hole_size = 0
                     hole_address = address
                     break
@@ -94,15 +108,14 @@ class Memory(tk.Canvas):
                 hole_size += 1
                 address += 1
 
-    def create_process(self, process_name, process_size):
-        """create_process
+    def create_process(self, process_name, process_size, address):
+        """ (string, int) -> Tk.Rectangle
 
-        :param process_name:
-        :param process_size:
+        Create Tk.Rectangle which represents a Process
         """
         self.processes.append(
             self.create_rectangle(0,
-                                  0,
+                                  address,
                                   M_WIDTH,
                                   process_size,
                                   fill=random.choice(self.colours),
@@ -112,6 +125,9 @@ class Memory(tk.Canvas):
         )
 
     def kill(self, process_name):
-        """kill"""
+        """ (string) -> None
+
+        Kill process in Process list
+        """
         if self.find_withtag(process_name):
             self.delete(process_name)

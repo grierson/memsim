@@ -3,7 +3,6 @@ Feature: Input Process Details
     I want to input Process details
     So that I add a new process to RAM
 
-    @wip
     Scenario Outline: Successfully input valid process details
         Given that I am on the Process Panel
         When I enter process details "<process_name>" 
