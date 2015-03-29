@@ -109,7 +109,7 @@ class Memory(tk.Canvas):
                 address += 1
 
     def create_process(self, process_name, process_size, address):
-        """ (string, int) -> Tk.Rectangle
+        """ (string, int, int) -> Tk.Rectangle
 
         Create Tk.Rectangle which represents a Process
         """

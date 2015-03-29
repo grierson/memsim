@@ -13,13 +13,13 @@ def given_process_panel_open(context):
     context.ram = Memory(parent)
     context.panel = ProcessPanel(parent, context.ram)
 
-@when(u'I enter process details "{process_name}"')
+@when(u'I enter process name "{process_name}"')
 def when_processs_name_entered(context, process_name):
     """ When I insert Process Name """
     context.panel.process_name = process_name
     assert context.panel.process_name == process_name
 
-@when(u'i enter process size "{process_size}"')
+@when(u'I enter process size "{process_size}"')
 def when_processs_size_entered(context, process_size):
     """ When I insert process size """
     context.panel.process_size = process_size
@@ -32,7 +32,7 @@ def when_create_button_pressed(context):
     # Box which requires manual click to close
     pass
 
-@then(u'process is added to the process list')
+@then(u'the process is added to the process list')
 def then_check_process_in_processes(context):
     """ Add process to Process List """
     # I can't check if the process is in the process list because I have not

@@ -28,41 +28,9 @@ class TestMemory(unittest.TestCase):
         self.assertEqual(self.ram.get_process_size("Blankspace"), 123)
 
     def test_get_process_address(self):
-        """ Test Return Process Address """
-        self.ram.create_process("Style", 200, 123)
-        self.assertEqual(self.ram.get_process_address("Style"), 123)
+        """ Test Return Process Address
 
-
-    def test_first_fit(self):
+        Note: create_process(process_name, process_size, address)
         """
-        | Address: 0   |
-        | Wonderland   |
-        | Size: 200    |
-        |              |
-        | Hole: 125    | (Style Should go here)
-        |              |
-        | Address: 325 |
-        | Red          |
-        | Size: 300    |
-        """
-        self.ram.create_process("Wonderland", 200, 0)
-        self.ram.create_process("Red", 300, 325)
-        self.ram.create_process("Style", 500, 100)
-        self.assertEqual(self.ram.get_process_address("Style"), 100)
-
-
-    """
-    ERROR!
-    Tests indirectly call TKERRORMESSAGE which requires user to close
-    (Tests are not automated)
-
-    def test_validate_process_name_isalpha(self):
-        self.assertTrue(self.ram.validate_process("Firefox", 200))
-        self.assertRaises(TypeError, self.ram.validate_process, "", 200)
-
-    def test_validate_process_size_isdigit(self):
-        self.assertRaises(TypeError, self.ram.validate_process, "Vim", "aaa")
-
-    def test_validate_process_size_greater_than_zero(self):
-        self.assertRaises(ValueError, self.ram.validate_process, "Vim", 0)
-    """
+        self.ram.create_process("Style", 200, 333)
+        self.assertEqual(self.ram.get_process_address("Style"), 333)
