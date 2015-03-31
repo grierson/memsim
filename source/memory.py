@@ -30,7 +30,7 @@ class Memory(tk.Canvas):
     def check_process_exists(self, process_name):
         """ (string) -> Bool
 
-        Check whether process name is in Process List 
+        Check whether process name is in Process List
         """
         return any([self.gettags(process)[0] for process in self.processes if
                     process_name in self.gettags(process)])
@@ -43,8 +43,9 @@ class Memory(tk.Canvas):
         1 -> Process Address
         2 -> FIXED WIDTH (M_WIDTH)
         3 -> Process Size
+        [X_POS, address, WIDTH, process_size]
         """
-        return list(map(int, self.coords(process_name)))
+        return [int(item) for item in self.coords(process_name)]
 
     def get_process_size(self, process_name):
         """ (string) -> int
@@ -120,9 +121,7 @@ class Memory(tk.Canvas):
                                   process_size,
                                   fill=random.choice(self.colours),
                                   width=1,
-                                  tag=process_name
-                                  )
-        )
+                                  tag=process_name))
 
     def kill(self, process_name):
         """ (string) -> None
