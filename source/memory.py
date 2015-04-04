@@ -108,8 +108,9 @@ class Memory(tk.Canvas):
 
         Kill process in Process list
         """
-        if self.find_withtag(process_name):
-            self.delete(process_name)
+        self.processes[:] = [item
+                             for item in self.processes
+                             if item.get("name") != process_name]
 
 
     """
@@ -136,7 +137,6 @@ class Memory(tk.Canvas):
 
             if hole_size >= process_size:
                 self.create_process(process_name, process_size, hole_address)
-                address = 1000
                 break
             else:
                 hole_size += 1

@@ -14,8 +14,8 @@ class TestMemory(unittest.TestCase):
     # Process Exists
     def test_check_process_exists(self):
         """ Test that a process name is in the Process List """
-        self.ram.create_process("Blink", 200, 0)
-        self.assertTrue(self.ram.check_process_exists("Blink"))
+        self.ram.create_process("Style", 200, 0)
+        self.assertTrue(self.ram.check_process_exists("Style"))
 
     # Process Size
     def test_get_process_size(self):
@@ -30,3 +30,13 @@ class TestMemory(unittest.TestCase):
         """
         self.ram.create_process("Style", 333, 111)
         self.assertEqual(self.ram.get_process_address("Style"), 111)
+
+    def test_kill(self):
+        """ Test Killing Processes
+
+        Create Process then Kill it
+        """
+        self.ram.create_process("Dave", 666, 0)
+        self.assertTrue(self.ram.check_process_exists("Dave"))
+        self.ram.kill("Dave")
+        self.assertFalse(self.ram.check_process_exists("Dave"))
