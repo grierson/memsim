@@ -28,7 +28,7 @@ def when_processs_size_entered(context, process_size):
 @when(u'I press the create button')
 def when_create_button_pressed(context):
     """ When I press the create button """
-    # Pressing button invokes validate_process() which creates a Error Dialog
+    # Pressing button invokes validate_process() which creates an Error Dialogue
     # Box which requires manual click to close
     pass
 
