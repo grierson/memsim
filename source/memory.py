@@ -64,9 +64,9 @@ class Memory(tk.Canvas):
         elif not str(size).isdigit():
             messagebox.showerror("Error!",
                                  "Size must only contain numbers")
-        elif int(size) <= 0:
+        elif int(size) <= 10:
             messagebox.showerror("Error!",
-                                 "Size must be larger than 0")
+                                 "Size must be greater than 10")
         elif self.check_process_exists(name):
             messagebox.showerror("Error!",
                                  "Process Already Exists")
@@ -81,7 +81,8 @@ class Memory(tk.Canvas):
         """
         self.processes.append({"name": name,
                                "size": size,
-                               "address": address}.copy())
+                               "address": address,
+                               "colour": random.choice(self.colours)}.copy())
         self.update_memory()
 
     def update_memory(self):
@@ -96,12 +97,16 @@ class Memory(tk.Canvas):
         # Redraw Processes
         for process in self.processes:
             self.create_rectangle(0,
-                                  process.get("address", None),
+                                  process.get("address"),
                                   M_WIDTH,
                                   process.get("address") + process.get("size"),
-                                  fill=random.choice(self.colours),
+                                  fill=process.get("colour"),
                                   width=1,
                                   tag=process.get("name"))
+            self.create_text(M_WIDTH / 2,
+                             process.get("address") + (process.get("size") / 2),
+                             text=process.get("name"))
+
 
     def kill(self, process_name):
         """ (string) -> None
@@ -127,17 +132,24 @@ class Memory(tk.Canvas):
         hole_size = 0
         hole_address = 0
 
+        if not self.processes:
+            self.create_process(process_name,
+                                process_size,
+                                0)
+            return
+
         while address <= M_HIGHT:
             for process in self.processes:
                 if address == process.get("address"):
                     address += process.get("size")
                     hole_size = 0
                     hole_address = address
-                    break
 
             if hole_size >= process_size:
-                self.create_process(process_name, process_size, hole_address)
-                break
+                self.create_process(process_name,
+                                    process_size,
+                                    hole_address + 1)
+                return
             else:
                 hole_size += 1
                 address += 1
