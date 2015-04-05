@@ -28,15 +28,36 @@ class TestMemory(unittest.TestCase):
 
         Note: create_process(process_name, process_size, address)
         """
-        self.ram.create_process("Style", 333, 111)
-        self.assertEqual(self.ram.get_process_address("Style"), 111)
+        self.ram.create_process("Red", 333, 111)
+        self.assertEqual(self.ram.get_process_address("Red"), 111)
 
     def test_kill(self):
-        """ Test Killing Processes
-
-        Create Process then Kill it
-        """
+        """ Create Process then Kill it """
         self.ram.create_process("Dave", 666, 0)
         self.assertTrue(self.ram.check_process_exists("Dave"))
         self.ram.kill("Dave")
         self.assertFalse(self.ram.check_process_exists("Dave"))
+
+    def test_first_fit(self):
+        """ Test First Fit Allocation
+
+        Process Size: 110
+        10 Bytes to big for the first hole
+
+        |----------------------------| Address: 0
+        |    FavoriteThings: 99      |
+        |----------------------------| Address: 100
+        |    Hole: 100               | * Process to big for this hole
+        |----------------------------| Address: 201
+        |    IWillSurvive: 99        |
+        |----------------------------| Address: 300
+        |    Hole: abs(memory)       | * Process should go here
+        |----------------------------|
+        """
+        # Create Processes to simulate real word
+        self.ram.create_process("FavoriteThings", 99, 0)
+        self.ram.create_process("IWillSurvive", 99, 201)
+
+        # Actually Past Process through First Fit alloction
+        self.ram.first_fit("Summertime", 110)
+        self.assertEqual(self.ram.get_process_address("Summertime"), 301)
