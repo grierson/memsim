@@ -11,13 +11,11 @@ class TestMemory(unittest.TestCase):
         parent = tkinter.Tk()
         self.ram = Memory(parent)
 
-    # Process Exists
     def test_check_process_exists(self):
         """ Test that a process name is in the Process List """
         self.ram.create_process("Style", 200, 0)
         self.assertTrue(self.ram.check_process_exists("Style"))
 
-    # Process Size
     def test_get_process_size(self):
         """ Test Return Process Size """
         self.ram.create_process("Blankspace", 123, 0)
@@ -37,6 +35,13 @@ class TestMemory(unittest.TestCase):
         self.assertTrue(self.ram.check_process_exists("Dave"))
         self.ram.kill("Dave")
         self.assertFalse(self.ram.check_process_exists("Dave"))
+
+    def test_get_process_list(self):
+        """ Test Get process List """
+        self.ram.create_process("Style", 200, 0)
+        self.ram.create_process("Red", 333, 111)
+        self.assertEqual(self.ram.get_process_list(), ["Style", "Red"])
+
 
     def test_first_fit(self):
         """ Test First Fit Allocation

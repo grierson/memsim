@@ -27,6 +27,10 @@ class Memory(tk.Canvas):
         self.processes = []
         self.colours = ["red", "blue", "green", "cyan", "yellow", "magenta"]
 
+    def get_process_list(self):
+        """ Get Process List """
+        return [process.get("name") for process in self.processes]
+
     def check_process_exists(self, process_name):
         """ (string) -> Bool
 
@@ -113,9 +117,11 @@ class Memory(tk.Canvas):
 
         Kill process in Process list
         """
+        print(process_name)
         self.processes[:] = [item
                              for item in self.processes
                              if item.get("name") != process_name]
+        self.update_memory()
 
 
     """
