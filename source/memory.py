@@ -129,33 +129,59 @@ class Memory(tk.Canvas):
             Policies
     ------------------------------- 
     """
-    def first_fit(self, process_name, process_size):
-        """ (string, int) -> None
-
-        First Fit Allocation
-        """
+    def find_holes(self):
+        """ Find all Holes in Memory """
         address = 0
         hole_size = 0
         hole_address = 0
+        holes = []
 
-        if not self.processes:
-            self.create_process(process_name,
-                                process_size,
-                                0)
-            return
+        if len(self.processes) <= 0:
+            return [{"address": 0, "size": M_HIGHT}]
 
         while address <= M_HIGHT:
             for process in self.processes:
-                if address == process.get("address"):
+                if address == process.get("address") or address == M_HIGHT:
                     address += process.get("size")
+                    holes.append({"address": hole_address,
+                                  "size": hole_size})
+                    hole_size = 0
+                    hole_address = address
+                elif address == M_HIGHT:
+                    holes.append({"address": hole_address,
+                                  "size": hole_size})
                     hole_size = 0
                     hole_address = address
 
-            if hole_size >= process_size:
+            hole_size += 1
+            address += 1
+
+        # Need to remove First Element which includes address: 0, size: 0
+        return holes[1:]
+
+    def first_fit(self, process_name, process_size):
+        """ (string, int) -> None
+
+        First Fit using find_holes
+        """
+        for hole in self.find_holes():
+            if hole.get("size") >= process_size:
                 self.create_process(process_name,
                                     process_size,
-                                    hole_address + 1)
+                                    hole.get("address"))
                 return
-            else:
-                hole_size += 1
-                address += 1
+
+    """
+    (string, int) -> None
+
+    (WIP)
+    Best Fit using find_holes
+
+    def best_fit(self, process_name, process_size):
+        self.create_process(process_name,
+                            process_size,
+                            min(abs(hole.get("size") 
+                                    for hole in self.find_holes(),
+                                    process_size)))
+        return
+        """

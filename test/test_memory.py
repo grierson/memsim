@@ -66,3 +66,31 @@ class TestMemory(unittest.TestCase):
         # Actually Past Process through First Fit alloction
         self.ram.first_fit("Summertime", 110)
         self.assertEqual(self.ram.get_process_address("Summertime"), 301)
+
+    def test_find_holes(self):
+        """ Test
+
+        Note: create_process(process_name, process_size, address)
+        M_HIGHT = 450
+
+        |----------------------------| Address: 0
+        |    FavoriteThings: 100     |
+        |----------------------------| Address: 101
+        |    Hole: 50                | * Process to big for this hole
+        |----------------------------| Address: 151
+        |    IWillSurvive: 49        |
+        |----------------------------| Address: 200
+        |    Hole: 50                | * Process should go here
+        |----------------------------| Address: 251
+        |    Hello: 99               |
+        |----------------------------| Address: 350
+        |    Hole: abs(memory)       | (M_HIGHT - hole address = hole size)
+        |----------------------------| (450 - 350 = 100)
+        """
+        self.ram.create_process("FavoriteThings", 100, 0)
+        self.ram.create_process("IWillSurvive", 49, 151)
+        self.ram.create_process("Hello", 99, 251)
+
+        self.assertEqual(self.ram.find_holes(), [{"address": 100, "size": 51},
+                                                 {"address": 200, "size": 51},
+                                                 {"address": 350, "size": 100}])
