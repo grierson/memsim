@@ -36,7 +36,8 @@ class Memory(tk.Canvas):
 
         Check whether process name is in Process List
         """
-        return any(True for process in self.processes
+        return any(True
+                   for process in self.processes
                    if process_name == process.get("name"))
 
     def get_process_size(self, process_name):
@@ -96,7 +97,7 @@ class Memory(tk.Canvas):
         [x1, y1, x2, y2]
         """
         # Clear Canvas
-        self.delete("ALL")
+        self.delete("all")
 
         # Redraw Processes
         for process in self.processes:
@@ -117,7 +118,6 @@ class Memory(tk.Canvas):
 
         Kill process in Process list
         """
-        print(process_name)
         self.processes[:] = [item
                              for item in self.processes
                              if item.get("name") != process_name]
