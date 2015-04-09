@@ -65,7 +65,7 @@ class TestMemory(unittest.TestCase):
 
         # Actually Past Process through First Fit alloction
         self.ram.first_fit("Summertime", 110)
-        self.assertEqual(self.ram.get_process_address("Summertime"), 301)
+        self.assertEqual(self.ram.get_process_address("Summertime"), 300)
 
     def test_find_holes(self):
         """ Test

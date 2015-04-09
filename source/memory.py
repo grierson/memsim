@@ -101,16 +101,24 @@ class Memory(tk.Canvas):
 
         # Redraw Processes
         for process in self.processes:
+            # TEMP variables to make code cleaner
+            name = process.get("name")
+            address = process.get("address")
+            size = process.get("size")
+
             self.create_rectangle(0,
-                                  process.get("address"),
+                                  address,
                                   M_WIDTH,
-                                  process.get("address") + process.get("size"),
+                                  address + size,
                                   fill=process.get("colour"),
                                   width=1,
-                                  tag=process.get("name"))
-            self.create_text(M_WIDTH / 2,
-                             process.get("address") + (process.get("size") / 2),
-                             text=process.get("name"))
+                                  tag=name)
+            self.create_text((M_WIDTH / 2),
+                             address + (size / 2),
+                             text="{} : {}".format(name, size))
+            self.create_text(22,
+                             address + 6,
+                             text="{}".format(hex(address)))
 
 
     def kill(self, process_name):
@@ -152,9 +160,14 @@ class Memory(tk.Canvas):
                                   "size": hole_size})
                     hole_size = 0
                     hole_address = address
-
             hole_size += 1
             address += 1
+
+        for hole in holes[1:]:
+            self.create_text(M_WIDTH / 2,
+                             hole.get("address") + 5,
+                             text="Hole {}".format(hole.get("size")))
+
 
         # Need to remove First Element which includes address: 0, size: 0
         return holes[1:]
@@ -172,16 +185,15 @@ class Memory(tk.Canvas):
                 return
 
     """
-    (string, int) -> None
-
-    (WIP)
-    Best Fit using find_holes
-
     def best_fit(self, process_name, process_size):
+        (string, int) -> None
+        
+        Best Fit using find_holes
+
         self.create_process(process_name,
                             process_size,
                             min(abs(hole.get("size") 
                                     for hole in self.find_holes(),
                                     process_size)))
         return
-        """
+    """
