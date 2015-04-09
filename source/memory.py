@@ -76,7 +76,7 @@ class Memory(tk.Canvas):
             messagebox.showerror("Error!",
                                  "Process Already Exists")
         else:
-            self.first_fit(name, size)
+            self.worst_fit(name, size)
 
 
     def create_process(self, name, size, address):
@@ -184,16 +184,39 @@ class Memory(tk.Canvas):
                                     hole.get("address"))
                 return
 
-    """
     def best_fit(self, process_name, process_size):
+        """
         (string, int) -> None
-        
+
         Best Fit using find_holes
+        """
+        smallest_hole = max(hole.get("size") for hole in self.find_holes())
+        best_address = 0
+
+        for hole in self.find_holes():
+            diff = hole.get("size") - process_size
+            if diff < smallest_hole and diff >= 0:
+                smallest_hole = diff
+                best_address = hole.get("address")
+
 
         self.create_process(process_name,
                             process_size,
-                            min(abs(hole.get("size") 
-                                    for hole in self.find_holes(),
-                                    process_size)))
+                            best_address)
+
         return
-    """
+
+    def worst_fit(self, process_name, process_size):
+        """
+        (string, int) -> None
+
+        Worst Fit using find_holes
+        """
+        biggest_hole = max(hole.get("size") for hole in self.find_holes())
+
+        for hole in self.find_holes():
+            if hole.get("size") == biggest_hole:
+                self.create_process(process_name,
+                                    process_size,
+                                    hole.get("address"))
+                return

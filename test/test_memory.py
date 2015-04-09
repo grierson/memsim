@@ -42,31 +42,6 @@ class TestMemory(unittest.TestCase):
         self.ram.create_process("Red", 333, 111)
         self.assertEqual(self.ram.get_process_list(), ["Style", "Red"])
 
-
-    def test_first_fit(self):
-        """ Test First Fit Allocation
-
-        Process Size: 110
-        10 Bytes to big for the first hole
-
-        |----------------------------| Address: 0
-        |    FavoriteThings: 99      |
-        |----------------------------| Address: 100
-        |    Hole: 100               | * Process to big for this hole
-        |----------------------------| Address: 201
-        |    IWillSurvive: 99        |
-        |----------------------------| Address: 300
-        |    Hole: abs(memory)       | * Process should go here
-        |----------------------------|
-        """
-        # Create Processes to simulate real word
-        self.ram.create_process("FavoriteThings", 99, 0)
-        self.ram.create_process("IWillSurvive", 99, 201)
-
-        # Actually Past Process through First Fit alloction
-        self.ram.first_fit("Summertime", 110)
-        self.assertEqual(self.ram.get_process_address("Summertime"), 300)
-
     def test_find_holes(self):
         """ Test
 
@@ -94,3 +69,76 @@ class TestMemory(unittest.TestCase):
         self.assertEqual(self.ram.find_holes(), [{"address": 100, "size": 51},
                                                  {"address": 200, "size": 51},
                                                  {"address": 350, "size": 100}])
+
+    def test_first_fit(self):
+        """ Test First Fit Allocation
+
+        Creating Process with a Size of 110
+        * The process is 10 Bytes too big for the first hole
+        * However the process is small enough to fit into the next
+        |----------------------------| Address: 0
+        |    FavoriteThings: 99      |
+        |----------------------------| Address: 100
+        |    Hole: 100               | * Process to big for this hole
+        |----------------------------| Address: 201
+        |    IWillSurvive: 99        |
+        |----------------------------| Address: 300
+        |    Hole: abs(memory)       | * Process should go here
+        |----------------------------|
+        """
+        # Create Processes to simulate real world example
+        self.ram.create_process("FavoriteThings", 99, 0)
+        self.ram.create_process("IWillSurvive", 99, 201)
+
+        # Actually Past Process through First Fit allocation
+        self.ram.first_fit("Summertime", 110)
+        self.assertEqual(self.ram.get_process_address("Summertime"), 300)
+
+    def test_best_fit(self):
+        """ Test Best Fit Allocation
+
+        Process Size: 110
+        * The process should skip the first hole because there may be more
+        * efficient holes within the memory
+        |----------------------------| Address: 0
+        |    Hole: 200               |
+        |                            |
+        |----------------------------| Address: 201
+        |    FavoriteThings: 99      |
+        |----------------------------| Address: 300
+        |    Hole: 130               | * Process should go here
+        |----------------------------|
+        |    IWillSurvive: 11        |
+        |----------------------------| Address: 300
+        """
+        self.ram.create_process("FavoriteThings", 99, 201)
+        self.ram.create_process("IWillSurvive", 11, 431)
+
+        # Actually Past Process through Best Fit allocation
+        self.ram.best_fit("Summertime", 110)
+        self.assertEqual(self.ram.get_process_address("Summertime"), 300)
+
+    def test_worst_fit(self):
+        """ Test worst Fit Allocation
+
+        Process Size: 110
+        * The process should skip the first hole because there may be more
+        * efficient holes within the memory
+        |----------------------------| Address: 0
+        |    Hole: 100               |
+        |----------------------------| Address: 101
+        |    FavoriteThings: 99      |
+        |----------------------------| Address: 200
+        |    Hole: 130               | * Process should go here
+        |----------------------------| Address: 331
+        |    IWillSurvive: 15        |
+        |----------------------------| Address: 346
+        |    Hole: 104               |
+        |----------------------------|
+        """
+        self.ram.create_process("FavoriteThings", 99, 101)
+        self.ram.create_process("IWillSurvive", 15, 331)
+
+        # Actually Past Process through Best Fit allocation
+        self.ram.worst_fit("Summertime", 110)
+        self.assertEqual(self.ram.get_process_address("Summertime"), 200)
