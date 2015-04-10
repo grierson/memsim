@@ -1,0 +1,39 @@
+{
+  "title": "Goal",
+  "id": 1,
+  "formatVersion": 2,
+  "ideas": {
+    "1": {
+      "title": "Actor",
+      "id": 2
+    },
+    "-1": {
+      "title": "Actor_Two",
+      "id": 3,
+      "ideas": {
+        "1": {
+          "title": "Impact_one",
+          "id": 5,
+          "ideas": {
+            "1": {
+              "title": "Deliverable",
+              "id": 7,
+              "attr": {
+                "position": [
+                  126.5,
+                  -110,
+                  1
+                ],
+                "style": {}
+              }
+            }
+          }
+        },
+        "2": {
+          "title": "Imapact_two",
+          "id": 8
+        }
+      }
+    }
+  }
+}
