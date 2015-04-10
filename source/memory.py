@@ -26,6 +26,7 @@ class Memory(tk.Canvas):
                            height=M_HIGHT)
         self.processes = []
         self.colours = ["red", "blue", "green", "cyan", "yellow", "magenta"]
+        self.find_holes()
         self.allocation_policies = [self.first_fit,
                                     self.best_fit,
                                     self.worst_fit]
@@ -127,6 +128,13 @@ class Memory(tk.Canvas):
                              address + 6,
                              text="{}".format(hex(address)))
 
+        for hole in self.find_holes():
+            if hole.get("size") == 0:
+                pass
+            else:
+                self.create_text(M_WIDTH / 2,
+                                 hole.get("address") + (hole.get("size") / 2),
+                                 text="Hole {}".format(hole.get("size")))
 
     def kill(self, process_name):
         """ (string) -> None
@@ -152,6 +160,9 @@ class Memory(tk.Canvas):
         holes = []
 
         if len(self.processes) <= 0:
+            self.create_text(M_WIDTH / 2,
+                             M_HIGHT / 2,
+                             text="Ram Size: {}".format(M_HIGHT))
             return [{"address": 0, "size": M_HIGHT}]
 
         while address <= M_HIGHT:
@@ -169,12 +180,6 @@ class Memory(tk.Canvas):
                     hole_address = address
             hole_size += 1
             address += 1
-
-        for hole in holes[1:]:
-            self.create_text(M_WIDTH / 2,
-                             hole.get("address") + 5,
-                             text="Hole {}".format(hole.get("size")))
-
 
         # Need to remove First Element which includes address: 0, size: 0
         return holes[1:]
