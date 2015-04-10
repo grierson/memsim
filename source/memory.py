@@ -26,6 +26,14 @@ class Memory(tk.Canvas):
                            height=M_HIGHT)
         self.processes = []
         self.colours = ["red", "blue", "green", "cyan", "yellow", "magenta"]
+        self.allocation_policies = [self.first_fit,
+                                    self.best_fit,
+                                    self.worst_fit]
+        self.selected_policy = 1
+
+    def set_selected_policy(self, value):
+        """ set self.selected_policies """
+        self.selected_policy = value
 
     def get_process_list(self):
         """ Get Process List """
@@ -76,8 +84,7 @@ class Memory(tk.Canvas):
             messagebox.showerror("Error!",
                                  "Process Already Exists")
         else:
-            self.worst_fit(name, size)
-
+            self.allocation_policies[self.selected_policy](name, size)
 
     def create_process(self, name, size, address):
         """ (string, int, int) -> Tk.Rectangle

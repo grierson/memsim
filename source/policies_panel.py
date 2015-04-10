@@ -22,16 +22,28 @@ class PoliciesPanel(tk.LabelFrame):
         :param controller:
         """
         tk.LabelFrame.__init__(self, parent, text="Policies")
-        self.allocation_policies()
         self.compact(ram)
         self.kill(ram)
+        self.allocation_policies(ram)
 
-    def allocation_policies(self):
+    def allocation_policies(self, ram):
         """ Load Allocation Policies Radio Buttons """
         tk.Label(self, text="Allocation Policies").grid(row=0, column=0)
-        tk.Radiobutton(self, text="First Fit", value=1).grid(row=1, column=0)
-        tk.Radiobutton(self, text="Best Fit", value=2).grid(row=2, column=0)
-        tk.Radiobutton(self, text="Worst Fit", value=3).grid(row=3, column=0)
+        self.selected_policie = tk.IntVar()
+        self.selected_policie.set(0)
+        self.policies = [
+            ("First Fit", 0),
+            ("Best Fit", 1),
+            ("Worst Fit", 2),
+        ]
+        for name, value in self.policies:
+            tk.Radiobutton(self,
+                           text=name,
+                           variable=self.selected_policie,
+                           value=value,
+                           command=lambda:
+                           ram.set_selected_policy(value)).grid(row=value,
+                                                                column=1)
 
     def compact(self, ram):
         """ Load Compact Button """
