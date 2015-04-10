@@ -1,16 +1,16 @@
-Feature: Input Process Details
-    As a Student
-    I want to input Process details
-    So that I can create and add new a process to RAM
+Feature: User inputs process details
+    As a User
+    I want to create a new process
+    So that I can add new processes to memory
 
-    Scenario Outline: Successfully input valid process details
-        Given that I am on the Process Panel
+    Scenario Outline: Input new valid process details
+        Given "<process_name>" does not exist in memory
         When I enter process name "<process_name>" 
         And I enter process size "<process_size>" 
-        And I press the create button
-        Then the process is added to the process list
+        And I press the create process button
+        Then "<process_name>" should be in memory
     Examples:
         | process_name | process_size |
         | Calculator   | 100          |
-        | Vim          | 800          |
+        | Vim          | 300          |
         | Clock        | 30           |
