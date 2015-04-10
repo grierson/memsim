@@ -23,7 +23,7 @@ class PoliciesPanel(tk.LabelFrame):
         """
         tk.LabelFrame.__init__(self, parent, text="Policies")
         self.allocation_policies()
-        self.compact()
+        self.compact(ram)
         self.kill(ram)
 
     def allocation_policies(self):
@@ -33,9 +33,12 @@ class PoliciesPanel(tk.LabelFrame):
         tk.Radiobutton(self, text="Best Fit", value=2).grid(row=2, column=0)
         tk.Radiobutton(self, text="Worst Fit", value=3).grid(row=3, column=0)
 
-    def compact(self):
+    def compact(self, ram):
         """ Load Compact Button """
-        tk.Button(self, text="Compact").grid(row=4, column=0)
+        tk.Button(self,
+                  text="Compact",
+                  command=lambda:
+                  ram.compact()).grid(row=4, column=0)
 
     def kill(self, ram):
         """ Load Process List and Kill Button """

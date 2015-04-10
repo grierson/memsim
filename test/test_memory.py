@@ -142,3 +142,35 @@ class TestMemory(unittest.TestCase):
         # Actually Past Process through Best Fit allocation
         self.ram.worst_fit("Summertime", 110)
         self.assertEqual(self.ram.get_process_address("Summertime"), 200)
+
+    def test_compact(self):
+        """ Test Compact
+
+        |----------------------------| Address: 0
+        |    Hole: 100               |
+        |----------------------------| Address: 101
+        |    FavoriteThings: 99      |
+        |----------------------------| Address: 200
+        |    Hole: 130               | * Process should go here
+        |----------------------------| Address: 331
+        |    IWillSurvive: 15        |
+        |----------------------------| Address: 346
+        |    Hole: 104               |
+        |----------------------------|
+
+        After
+        |----------------------------| Address: 0
+        |    FavoriteThings: 99      |
+        |----------------------------| Address: 100
+        |    IWillSurvive: 15        |
+        |----------------------------| Address: 116
+        |    Hole: N                 |
+        |----------------------------|
+        """
+        self.ram.create_process("FavoriteThings", 99, 101)
+        self.ram.create_process("IWillSurvive", 15, 331)
+
+        self.ram.compact()
+
+        self.assertEqual(self.ram.get_process_address("FavoriteThings"), 0)
+        self.assertEqual(self.ram.get_process_address("IWillSurvive"), 100)

@@ -185,8 +185,7 @@ class Memory(tk.Canvas):
                 return
 
     def best_fit(self, process_name, process_size):
-        """
-        (string, int) -> None
+        """ (string, int) -> None
 
         Best Fit using find_holes
         """
@@ -207,8 +206,7 @@ class Memory(tk.Canvas):
         return
 
     def worst_fit(self, process_name, process_size):
-        """
-        (string, int) -> None
+        """ (string, int) -> None
 
         Worst Fit using find_holes
         """
@@ -220,3 +218,16 @@ class Memory(tk.Canvas):
                                     process_size,
                                     hole.get("address"))
                 return
+
+    def compact(self):
+        """ Compact """
+        for _ in range(len(self.processes)):
+            prev_address = 0
+            prev_size = 0
+            for process in self.processes:
+                temp_address = process.get("address")
+                process["address"] = prev_address + prev_size
+                prev_address = temp_address
+                prev_size = process.get("size") + 1 # Plus one so no overlap
+
+        self.update_memory()
