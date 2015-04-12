@@ -1,65 +1,27 @@
-************* Module memsim
-C:  1, 0: Missing module docstring (missing-docstring)
-************* Module memsim.main
-F:  3, 0: Unable to import 'process_panel' (import-error)
-R:  5, 0: Too few public methods (0/2) (too-few-public-methods)
-************* Module memsim.process_panel
-W: 39,40: Lambda may not be necessary (unnecessary-lambda)
-R:  8, 0: Too few public methods (1/2) (too-few-public-methods)
+************* Module source.memory
+F:  7, 4: Unable to import 'Tkinter' (import-error)
+F:  8, 4: Unable to import 'tkMessageBox' (import-error)
+R: 15, 0: Too many ancestors (10/7) (too-many-ancestors)
+W:154,-1: String statement has no effect (pointless-string-statement)
+************* Module source.policies_panel
+F:  6, 4: Unable to import 'Tkinter' (import-error)
+R:  9, 0: Too many ancestors (8/7) (too-many-ancestors)
+W: 45,51: Cell variable value defined in loop (cell-var-from-loop)
+W: 52,26: Lambda may not be necessary (unnecessary-lambda)
+W: 81,53: Access to a protected member _setit of a client class (protected-access)
+************* Module source.main
+F:  6, 4: Unable to import 'Tkinter' (import-error)
+F:  7, 0: Unable to import 'policies_panel' (import-error)
+F:  8, 0: Unable to import 'process_panel' (import-error)
+F:  9, 0: Unable to import 'memory' (import-error)
+************* Module source.process_panel
+F:  6, 4: Unable to import 'Tkinter' (import-error)
+R:  9, 0: Too many ancestors (8/7) (too-many-ancestors)
 
 
 Report
 ======
-41 statements analysed.
-
-Messages by category
---------------------
-
-+-----------+-------+---------+-----------+
-|type       |number |previous |difference |
-+===========+=======+=========+===========+
-|convention |1      |1        |=          |
-+-----------+-------+---------+-----------+
-|refactor   |2      |2        |=          |
-+-----------+-------+---------+-----------+
-|warning    |1      |1        |=          |
-+-----------+-------+---------+-----------+
-|error      |0      |0        |=          |
-+-----------+-------+---------+-----------+
-
-
-
-% errors / warnings by module
------------------------------
-
-+---------------------+------+--------+---------+-----------+
-|module               |error |warning |refactor |convention |
-+=====================+======+========+=========+===========+
-|memsim.process_panel |0.00  |100.00  |50.00    |0.00       |
-+---------------------+------+--------+---------+-----------+
-
-
-
-Messages
---------
-
-+-----------------------+------------+
-|message id             |occurrences |
-+=======================+============+
-|too-few-public-methods |2           |
-+-----------------------+------------+
-|unnecessary-lambda     |1           |
-+-----------------------+------------+
-|missing-docstring      |1           |
-+-----------------------+------------+
-|import-error           |1           |
-+-----------------------+------------+
-
-
-
-Global evaluation
------------------
-Your code has been rated at 9.02/10 (previous run: 9.02/10, +0.00)
+180 statements analysed.
 
 Statistics by type
 ------------------
@@ -67,14 +29,31 @@ Statistics by type
 +---------+-------+-----------+-----------+------------+---------+
 |type     |number |old number |difference |%documented |%badname |
 +=========+=======+===========+===========+============+=========+
-|module   |3      |3          |=          |66.67       |0.00     |
+|module   |5      |5          |=          |100.00      |0.00     |
 +---------+-------+-----------+-----------+------------+---------+
-|class    |2      |2          |=          |100.00      |0.00     |
+|class    |4      |4          |=          |100.00      |0.00     |
 +---------+-------+-----------+-----------+------------+---------+
-|method   |3      |3          |=          |100.00      |0.00     |
+|method   |22     |22         |=          |100.00      |0.00     |
 +---------+-------+-----------+-----------+------------+---------+
-|function |1      |1          |=          |100.00      |0.00     |
+|function |0      |0          |=          |0           |0        |
 +---------+-------+-----------+-----------+------------+---------+
+
+
+
+Raw metrics
+-----------
+
++----------+-------+------+---------+-----------+
+|type      |number |%     |previous |difference |
++==========+=======+======+=========+===========+
+|code      |253    |64.54 |253      |=          |
++----------+-------+------+---------+-----------+
+|docstring |99     |25.26 |99       |=          |
++----------+-------+------+---------+-----------+
+|comment   |10     |2.55  |10       |=          |
++----------+-------+------+---------+-----------+
+|empty     |30     |7.65  |30       |=          |
++----------+-------+------+---------+-----------+
 
 
 
@@ -91,20 +70,60 @@ Duplication
 
 
 
-Raw metrics
------------
+Messages by category
+--------------------
 
-+----------+-------+------+---------+-----------+
-|type      |number |%     |previous |difference |
-+==========+=======+======+=========+===========+
-|code      |51     |60.71 |51       |=          |
-+----------+-------+------+---------+-----------+
-|docstring |22     |26.19 |22       |=          |
-+----------+-------+------+---------+-----------+
-|comment   |4      |4.76  |4        |=          |
-+----------+-------+------+---------+-----------+
-|empty     |7      |8.33  |7        |=          |
-+----------+-------+------+---------+-----------+
++-----------+-------+---------+-----------+
+|type       |number |previous |difference |
++===========+=======+=========+===========+
+|convention |0      |0        |=          |
++-----------+-------+---------+-----------+
+|refactor   |3      |3        |=          |
++-----------+-------+---------+-----------+
+|warning    |4      |4        |=          |
++-----------+-------+---------+-----------+
+|error      |0      |0        |=          |
++-----------+-------+---------+-----------+
 
 
+
+% errors / warnings by module
+-----------------------------
+
++----------------------+------+--------+---------+-----------+
+|module                |error |warning |refactor |convention |
++======================+======+========+=========+===========+
+|source.policies_panel |0.00  |75.00   |33.33    |0.00       |
++----------------------+------+--------+---------+-----------+
+|source.memory         |0.00  |25.00   |33.33    |0.00       |
++----------------------+------+--------+---------+-----------+
+|source.process_panel  |0.00  |0.00    |33.33    |0.00       |
++----------------------+------+--------+---------+-----------+
+
+
+
+Messages
+--------
+
++---------------------------+------------+
+|message id                 |occurrences |
++===========================+============+
+|import-error               |8           |
++---------------------------+------------+
+|too-many-ancestors         |3           |
++---------------------------+------------+
+|unnecessary-lambda         |1           |
++---------------------------+------------+
+|protected-access           |1           |
++---------------------------+------------+
+|pointless-string-statement |1           |
++---------------------------+------------+
+|cell-var-from-loop         |1           |
++---------------------------+------------+
+
+
+
+Global evaluation
+-----------------
+Your code has been rated at 9.61/10 (previous run: 9.61/10, +0.00)
 

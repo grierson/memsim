@@ -134,7 +134,7 @@ class Memory(tk.Canvas):
             else:
                 self.create_text(M_WIDTH / 2,
                                  hole.get("address") + (hole.get("size") / 2),
-                                 text="Hole {}".format(hole.get("size")))
+                                 text="Hole : {}".format(hole.get("size")))
 
     def kill(self, process_name):
         """ (string) -> None

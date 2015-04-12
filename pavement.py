@@ -18,8 +18,6 @@ install_distutils_tasks()
 NAME = "MemSim"
 VERSION = open("VERSION.txt").read().strip()
 DESCRIPTION = "Memory Mangement Simulator"
-REQUIRES = parse_requirements("requirements.txt")
-INSTALL_REQUIRES = [str(r.req) for r in REQUIRES]
 
 CLASSIFIERS = """\
 Development Status :: 4 - Beta
@@ -51,7 +49,6 @@ options(
         keywords="utility",
         platforms=['any'],
         classifiers=CLASSIFIERS.splitlines(),
-        install_requires=INSTALL_REQUIRES,
         include_package_data=True,
     ),
     minilib=Bunch(
@@ -79,44 +76,44 @@ def unit():
     sh('py.test test/')
 
 @task
-def functional():
-    """bdd"""
-    sh('behave --tags=wip')
-
-@task
-def functional_all():
+def acceptance():
     """bdd"""
     sh('behave')
     
 @task
 def pylint():
     """pylint"""
-    sh('pylint memsim/')
+    sh('pylint source/')
 
 @task
 def cov():
     """cov"""
-    sh('py.test --cov=memsim/')
+    sh('py.test --cov=source/')
 
 # Generate Reports
 @task
 def report_pylint():
     """lint"""
     #sh('pylint --msg-template="{path}:{line}:[{msg_id}({symbol}), {obj}] {msg}" memsim/ > reports/pylint.txt')
-    sh('pylint memsim/ > reports/pylint.txt')
+    sh('pylint source/ > reports/pylint.txt')
 
 @task
 def report_cov():
     """cov"""
-    sh('py.test --cov-report xml --cov=memsim/')
+    sh('py.test --cov-report xml --cov=source/')
     sh('mv coverage.xml reports/.')
 
 @task
-def report_bdd():
+def report_unit():
+    """cov"""
+    sh('py.test --junitxml=reports/junit_unit.xml')
+
+@task
+def report_acceptance():
     """report_sbe"""
     sh('behave --junit --junit-directory=reports/')
 
-@needs('report_bdd', 'report_cov', 'report_pylint')
+@needs('report_acceptance', 'report_unit', 'report_cov', 'report_pylint')
 def report():
     """report"""
     pass
