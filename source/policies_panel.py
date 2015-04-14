@@ -63,8 +63,8 @@ class PoliciesPanel(tk.LabelFrame):
         tk.Button(self,
                   text="Update process list",
                   command=lambda:
-                  self.update_list(ram.get_process_list())).grid(row=6,
-                                                                 column=0)
+                  self.update_list(ram.process_list)).grid(row=6,
+                                                           column=0)
 
         tk.Button(self,
                   text="Kill process",

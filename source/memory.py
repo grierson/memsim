@@ -36,7 +36,8 @@ class Memory(tk.Canvas):
         """ set self.selected_policies """
         self.selected_policy = value
 
-    def get_process_list(self):
+    @property
+    def process_list(self):
         """ Get Process List """
         return [process.get("name") for process in self.processes]
 
@@ -107,6 +108,11 @@ class Memory(tk.Canvas):
         # Clear Canvas
         self.delete("all")
 
+        # If Processes Empty then do nothing
+        if len(self.processes) == 0:
+            self.find_holes()
+            return None
+
         # Redraw Processes
         for process in self.processes:
             # TEMP variables to make code cleaner
@@ -146,11 +152,10 @@ class Memory(tk.Canvas):
                              if item.get("name") != process_name]
         self.update_memory()
 
-
     """
     -------------------------------
             Policies
-    ------------------------------- 
+    -------------------------------
     """
     def find_holes(self):
         """ Find all Holes in Memory """
@@ -210,7 +215,6 @@ class Memory(tk.Canvas):
                 smallest_hole = diff
                 best_address = hole.get("address")
 
-
         self.create_process(process_name,
                             process_size,
                             best_address)
@@ -240,6 +244,6 @@ class Memory(tk.Canvas):
                 temp_address = process.get("address")
                 process["address"] = prev_address + prev_size
                 prev_address = temp_address
-                prev_size = process.get("size") + 1 # Plus one so no overlap
+                prev_size = process.get("size")  # Plus one so no overlap
 
         self.update_memory()
