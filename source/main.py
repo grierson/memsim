@@ -8,6 +8,7 @@ from policies_panel import PoliciesPanel
 from process_panel import ProcessPanel
 from memory import Memory
 
+
 class Mainwindow(tk.Tk):
     """Mainwindow"""
     def __init__(self, *args, **kwargs):

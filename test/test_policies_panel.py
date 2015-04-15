@@ -21,9 +21,9 @@ class TestPloiciesPanel(unittest.TestCase):
         """
         self.ram.create_process("Style", 200, 0)
         self.ram.create_process("Red", 150, 500)
-        self.assertEqual(self.ram.get_process_list(), ["Style", "Red"])
+        self.assertEqual(self.ram.process_list, ["Style", "Red"])
 
-        self.panel.update_list(self.ram.get_process_list())
+        self.panel.update_list(self.ram.process_list)
 
         """ FIND menu GET LIST VALUES
         self.assertEqual(self.panel.menu.cget('list'), ["Style", "Red"])

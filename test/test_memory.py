@@ -40,7 +40,7 @@ class TestMemory(unittest.TestCase):
         """ Test Get process List """
         self.ram.create_process("Style", 200, 0)
         self.ram.create_process("Red", 333, 111)
-        self.assertEqual(self.ram.get_process_list(), ["Style", "Red"])
+        self.assertEqual(self.ram.process_list, ["Style", "Red"])
 
     def test_find_holes(self):
         """ Test
@@ -161,7 +161,7 @@ class TestMemory(unittest.TestCase):
         After
         |----------------------------| Address: 0
         |    FavoriteThings: 99      |
-        |----------------------------| Address: 100
+        |----------------------------| Address: 99
         |    IWillSurvive: 15        |
         |----------------------------| Address: 116
         |    Hole: N                 |
@@ -173,4 +173,4 @@ class TestMemory(unittest.TestCase):
         self.ram.compact()
 
         self.assertEqual(self.ram.get_process_address("FavoriteThings"), 0)
-        self.assertEqual(self.ram.get_process_address("IWillSurvive"), 100)
+        self.assertEqual(self.ram.get_process_address("IWillSurvive"), 99)

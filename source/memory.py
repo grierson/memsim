@@ -30,11 +30,13 @@ class Memory(tk.Canvas):
         self.allocation_policies = [self.first_fit,
                                     self.best_fit,
                                     self.worst_fit]
-        self.selected_policy = 1
+        self.policy_selected = 1
 
-    def set_selected_policy(self, value):
+    def selected_policy(self, value):
         """ set self.selected_policies """
-        self.selected_policy = value
+        if not isinstance(value, int):
+            raise TypeError('Expected an int')
+        self.policy_selected = value
 
     @property
     def process_list(self):
@@ -86,7 +88,7 @@ class Memory(tk.Canvas):
             messagebox.showerror("Error!",
                                  "Process Already Exists")
         else:
-            self.allocation_policies[self.selected_policy](name, size)
+            self.allocation_policies[self.policy_selected](name, size)
 
     def create_process(self, name, size, address):
         """ (string, int, int) -> Tk.Rectangle
@@ -134,13 +136,16 @@ class Memory(tk.Canvas):
                              address + 6,
                              text="{}".format(hex(address)))
 
+        n_holes = 1
         for hole in self.find_holes():
             if hole.get("size") == 0:
                 pass
             else:
                 self.create_text(M_WIDTH / 2,
                                  hole.get("address") + (hole.get("size") / 2),
-                                 text="Hole : {}".format(hole.get("size")))
+                                 text="Hole {} : {}".format(n_holes,
+                                                            hole.get("size")))
+                n_holes += 1
 
     def kill(self, process_name):
         """ (string) -> None
