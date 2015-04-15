@@ -95,7 +95,7 @@ def cov():
 def report_pylint():
     """lint"""
     #sh('pylint --msg-template="{path}:{line}:[{msg_id}({symbol}), {obj}] {msg}" memsim/ > reports/pylint.txt')
-    sh('pylint source/ > reports/pylint.txt')
+    sh('pylint source/ --output-format=html > reports/pylint.html')
 
 @task
 def report_cov():
