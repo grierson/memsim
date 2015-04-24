@@ -100,7 +100,6 @@ class Memory(tk.Canvas):
                                'address': address,
                                'colour': random.choice(self.colours)}.copy())
         self.update_memory()
-        print(self.policy_selected)
 
     def update_memory(self):
         ''' (string, int, int) -> Tk.Rectangle
