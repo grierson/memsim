@@ -30,12 +30,10 @@ class Memory(tk.Canvas):
         self.allocation_policies = [self.first_fit,
                                     self.best_fit,
                                     self.worst_fit]
-        self.policy_selected = 1
+        self.policy_selected = 0
 
     def selected_policy(self, value):
         ''' set self.selected_policies '''
-        if not isinstance(value, int):
-            raise TypeError('Expected an int')
         self.policy_selected = value
 
     @property
@@ -100,6 +98,7 @@ class Memory(tk.Canvas):
                                'address': address,
                                'colour': random.choice(self.colours)}.copy())
         self.update_memory()
+        print(self.policy_selected)
 
     def update_memory(self):
         ''' (string, int, int) -> Tk.Rectangle

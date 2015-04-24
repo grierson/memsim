@@ -42,8 +42,8 @@ class PoliciesPanel(tk.LabelFrame):
                            variable=self.selected_policie,
                            value=value,
                            command=lambda:
-                           ram.selected_policy(value)).grid(row=value,
-                                                            column=1)
+                           ram.selected_policy(self.selected_policie.get())
+                           ).grid(row=value, column=1)
 
     def compact(self, ram):
         """ Load Compact Button """
