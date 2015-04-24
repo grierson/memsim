@@ -72,6 +72,11 @@ class PoliciesPanel(tk.LabelFrame):
                   command=lambda:
                   ram.kill(self.var.get())).grid(row=6, column=1)
 
+        tk.Button(self,
+                  text="Swap process",
+                  command=lambda:
+                  ram.swap(self.var.get())).grid(row=7, column=1)
+
     def update_list(self, processes):
         """ Update Plist """
         self.var.set('')

@@ -14,11 +14,12 @@ M_HIGHT = 450
 
 class Memory(tk.Canvas):
     '''Ram'''
-    def __init__(self, parent):
+    def __init__(self, parent, name):
         ''' (Tk.Frame) -> None
 
         Create Process List
         '''
+        self.mem_name = name
         tk.Canvas.__init__(self,
                            parent,
                            bg='white',
@@ -172,7 +173,8 @@ class Memory(tk.Canvas):
         if len(self.processes) <= 0:
             self.create_text(M_WIDTH / 2,
                              M_HIGHT / 2,
-                             text='Ram Size: {}'.format(M_HIGHT))
+                             text='{} Size: {}'.format(self.mem_name,
+                                                       M_HIGHT))
             return [{'address': 0, 'size': M_HIGHT}]
 
         while address <= M_HIGHT:
@@ -260,3 +262,7 @@ class Memory(tk.Canvas):
                                                        process_name),
                                         page_size,
                                         hole.get('address'))
+
+    def swap(process_name):
+        '''swap'''
+        pass
