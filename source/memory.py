@@ -29,7 +29,8 @@ class Memory(tk.Canvas):
         self.find_holes()
         self.allocation_policies = [self.first_fit,
                                     self.best_fit,
-                                    self.worst_fit]
+                                    self.worst_fit,
+                                    self.paging]
         self.policy_selected = 0
 
     def selected_policy(self, value):
@@ -245,3 +246,17 @@ class Memory(tk.Canvas):
                 prev_size = process.get('size')
 
         self.update_memory()
+
+    def paging(self, process_name, process_size):
+        ''' Paging '''
+        round_up = lambda num: int(num + 1) if int(num) != num else int(num)
+        page_size = 32
+        pages = round_up(process_size / page_size)
+
+        for page_number in range(pages):
+            for hole in self.find_holes():
+                if hole.get('size') >= page_size:
+                    self.create_process('{}:{}'.format(page_number,
+                                                       process_name),
+                                        page_size,
+                                        hole.get('address'))

@@ -35,6 +35,7 @@ class PoliciesPanel(tk.LabelFrame):
             ("First Fit", 0),
             ("Best Fit", 1),
             ("Worst Fit", 2),
+            ("Paging Fit", 3),
         ]
         for name, value in self.policies:
             tk.Radiobutton(self,
